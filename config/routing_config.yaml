@@ -1,0 +1,8 @@
+max_retries: 5
+base_retry_backoff_ms: 500
+max_ttl: 8
+drop_on_duplicate: true
+
+ids:
+  window_seconds: 5
+  max_msgs_per_window: 20
