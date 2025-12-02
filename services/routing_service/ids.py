@@ -1,18 +1,30 @@
 # services/routing_service/ids.py
-# This covers “encrypted logging” conceptually – the log file is already isolated. 
-# Later you can replace the write with a call to Person-3’s crypto service to encrypt json.dumps(record) before writing.
+# test: pytest services/routing_service/tests/test_ids.py -v
+
+"""
+Routing IDS / anomaly detection for Person 2.
+
+- Sliding-window rate limiting per peer
+- Duplicate msg_id suppression
+- Suspicious event logging (plaintext for now, can be encrypted later)
+"""
+
+from __future__ import annotations
+
+import json
 from collections import defaultdict, deque
 from datetime import datetime, timezone, timedelta
-from typing import Deque, Dict, Set
-import json
 from pathlib import Path
+from typing import Deque, Dict, Set
+
 import yaml
 
-# Load config
-CONFIG_PATH = Path("routing_config.yaml")
+# Load config from same folder as routing config
+CONFIG_PATH = Path("config/routing_config.yaml")
 if CONFIG_PATH.exists():
     with CONFIG_PATH.open() as f:
-        cfg = yaml.safe_load(f).get("ids", {})
+        cfg_root = yaml.safe_load(f) or {}
+        cfg = cfg_root.get("ids", {})
 else:
     cfg = {}
 
@@ -24,6 +36,7 @@ _peer_windows: Dict[str, Deque[datetime]] = defaultdict(deque)
 _seen_msg_ids: Set[str] = set()
 
 LOG_PATH = Path("routing_suspicious.log")
+
 
 def _now() -> datetime:
     return datetime.now(timezone.utc)
@@ -49,16 +62,27 @@ def is_rate_limited(peer: str) -> bool:
 
 
 def is_duplicate(msg_id: str) -> bool:
+    """
+    Simple in-memory duplicate detection by msg_id.
+    """
     if msg_id in _seen_msg_ids:
         return True
     _seen_msg_ids.add(msg_id)
     return False
 
 
-def log_suspicious(event_type: str, peer: str, msg_id: str, detail: str, extra: dict | None = None):
+def log_suspicious(
+    event_type: str,
+    peer: str,
+    msg_id: str,
+    detail: str,
+    extra: dict | None = None,
+) -> None:
     """
-    Suspicious log. For now it's plaintext → in Phase 3 you can pipe this
-    through Crypto service for encrypted logging.
+    Log suspicious events as JSON-lines.
+
+    Later you can route this through the crypto service to encrypt
+    `json.dumps(record)` before writing to disk.
     """
     record = {
         "ts": _now().isoformat(),

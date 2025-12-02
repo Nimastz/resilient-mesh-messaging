@@ -1,13 +1,37 @@
 # services/tests/routing_stress_tests.py
-import asyncio
-import httpx
-import uuid
+# python -m services.routing_service.main
+# test: pytest services/routing_service/tests/routing_stress_tests.py -v
+"""
+Integration-style stress tests for the routing service (Person 2).
+
+These tests exercise:
+- message storm → rate limiting / IDS
+- node churn → different peers sending a few messages
+- partitions → TTL=0 messages should be dropped with TTL_EXPIRED
+
+They assume the routing service is running on:
+    http://localhost:9002
+
+Start it with:
+    python -m services.routing_service.main
+
+Then run:
+    pytest services/routing_service/tests/test_routing_stress.py -v
+"""
+
 import time
-import sys, os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import uuid
+import httpx
+import pytest
+
 from lib.envelope import MessageEnvelope, EnvelopeHeader, ChunkInfo, RoutingMeta
 
-ROUTER_BASE = "http://localhost:9002"   # or 7002 if you change the port
+
+ROUTER_BASE = "http://localhost:9002"  # adjust if you change the port
+
+
+def _now_ts() -> int:
+    return int(time.time())
 
 
 def make_envelope(sender_fp: str, recipient_fp: str, ttl: int = 5) -> MessageEnvelope:
@@ -19,67 +43,133 @@ def make_envelope(sender_fp: str, recipient_fp: str, ttl: int = 5) -> MessageEnv
         nonce="dummy-nonce",
         ttl=ttl,
         hop_count=0,
-        ts=int(time.time()),
+        ts=_now_ts(),
     )
     return MessageEnvelope(
         header=header,
-        ciphertext="deadbeef",    # placeholder
+        ciphertext="deadbeef",  # placeholder AES-GCM ciphertext
         chunks=ChunkInfo(),
         routing=RoutingMeta(),
     )
 
 
-async def simulate_message_storm(peer: str, count: int = 100):
-    async with httpx.AsyncClient() as client:
-        for _ in range(count):
+async def _ensure_router_or_skip():
+    """
+    Try hitting /v1/router/stats; if it fails, skip tests.
+    """
+    async with httpx.AsyncClient(timeout=3.0) as client:
+        try:
+            r = await client.get(f"{ROUTER_BASE}/v1/router/stats")
+        except Exception as e:
+            pytest.skip(f"Router service not running on {ROUTER_BASE}: {e}")
+
+        if r.status_code >= 500:
+            pytest.skip(f"Router service unhealthy: {r.status_code} {r.text}")
+
+
+@pytest.mark.anyio
+async def test_message_storm_triggers_rate_limit():
+    """
+    Send a burst of messages from a single peer.
+
+    Expected behavior with your IDS:
+    - some messages are accepted
+    - later ones are dropped due to per-peer rate limiting
+    """
+    await _ensure_router_or_skip()
+
+    peer = "stormy-peer"
+    total = 40
+    accepted = 0
+    dropped = 0
+
+    async with httpx.AsyncClient(timeout=5.0) as client:
+        for _ in range(total):
             env = make_envelope(sender_fp=peer, recipient_fp="target")
             payload = {
-                "chunk": env.dict(),
+                "chunk": env.model_dump(),
                 "link_meta": {"peer": peer, "rssi": -40},
             }
-            resp = await client.post(f"{ROUTER_BASE}/v1/router/on_chunk_received", json=payload)
-            print("storm:", resp.status_code, resp.json())
+            r = await client.post(f"{ROUTER_BASE}/v1/router/on_chunk_received", json=payload)
+            assert r.status_code == 200, f"Unexpected status: {r.status_code} {r.text}"
+            body = r.json()
+            if body.get("accepted"):
+                accepted += 1
+            else:
+                dropped += 1
+
+    # We expect some accepted, some dropped (IDS engaged)
+    assert accepted > 0, "Storm test: no messages were accepted"
+    assert dropped > 0, "Storm test: no messages were dropped; IDS rate limit may not be working"
 
 
-async def simulate_node_churn(peers: list[str], messages_per_peer: int = 5):
-    async with httpx.AsyncClient() as client:
+@pytest.mark.anyio
+async def test_node_churn_multiple_peers_ok():
+    """
+    Simulate 'node churn' – several peers each sending a few messages.
+
+    Expected behavior:
+    - messages from different peers within limits should generally be accepted
+    """
+    await _ensure_router_or_skip()
+
+    peers = [f"peer-{i}" for i in range(5)]
+    messages_per_peer = 3
+    total = len(peers) * messages_per_peer
+
+    accepted = 0
+    dropped = 0
+
+    async with httpx.AsyncClient(timeout=5.0) as client:
         for peer in peers:
             for _ in range(messages_per_peer):
                 env = make_envelope(sender_fp=peer, recipient_fp="target")
                 payload = {
-                    "chunk": env.dict(),
+                    "chunk": env.model_dump(),
                     "link_meta": {"peer": peer, "rssi": -60},
                 }
-                resp = await client.post(f"{ROUTER_BASE}/v1/router/on_chunk_received", json=payload)
-                print("churn:", peer, resp.status_code, resp.json())
+                r = await client.post(f"{ROUTER_BASE}/v1/router/on_chunk_received", json=payload)
+                assert r.status_code == 200, f"Node churn: {peer} got {r.status_code} {r.text}"
+                body = r.json()
+                if body.get("accepted"):
+                    accepted += 1
+                else:
+                    dropped += 1
+
+    # In this mild churn case, we expect no or very few drops
+    assert accepted > 0, "Node churn: no messages were accepted"
+    # it's okay if dropped > 0, but if ALL dropped, something is wrong:
+    assert accepted >= total / 2, "Too many messages dropped under light node churn"
 
 
-async def simulate_partitions():
+@pytest.mark.anyio
+async def test_partition_ttl_expired():
     """
-    Very rough: we just send messages with small TTL to simulate them dying
-    before reaching destination.
+    Simulate 'network partition' by sending messages with ttl=0.
+
+    Expected behavior:
+    - router should reply with HTTP 410 and error code TTL_EXPIRED.
     """
-    async with httpx.AsyncClient() as client:
-        for _ in range(10):
-            env = make_envelope(sender_fp="peer-partitioned", recipient_fp="far-away", ttl=0)
+    await _ensure_router_or_skip()
+
+    attempts = 5
+    async with httpx.AsyncClient(timeout=5.0) as client:
+        for _ in range(attempts):
+            env = make_envelope(
+                sender_fp="peer-partitioned",
+                recipient_fp="far-away",
+                ttl=0,
+            )
             payload = {
-                "chunk": env.dict(),
+                "chunk": env.model_dump(),
                 "link_meta": {"peer": "peer-partitioned", "rssi": -90},
             }
-            resp = await client.post(f"{ROUTER_BASE}/v1/router/on_chunk_received", json=payload)
-            print("partition:", resp.status_code, resp.json())
-
-
-async def main():
-    print("== Storm test ==")
-    await simulate_message_storm("stormy-peer", 40)
-
-    print("== Node churn ==")
-    await simulate_node_churn([f"peer-{i}" for i in range(5)], messages_per_peer=3)
-
-    print("== Partition ==")
-    await simulate_partitions()
-
-
-if __name__ == "__main__":
-    asyncio.run(main())
+            r = await client.post(f"{ROUTER_BASE}/v1/router/on_chunk_received", json=payload)
+            assert r.status_code == 410, (
+                f"Expected 410 TTL_EXPIRED, got {r.status_code} {r.text}"
+            )
+            body = r.json()
+            # if you use standard error format, we can check code:
+            if isinstance(body, dict) and "detail" in body:
+                err = body["detail"].get("error", {})
+                assert err.get("code") == "TTL_EXPIRED"

@@ -1,4 +1,5 @@
 # services/tests/ids.py
+# test: pytest services/routing_service/tests/test_ids.py -v
 import time
 from services.routing_service.ids import is_duplicate, is_rate_limited
 

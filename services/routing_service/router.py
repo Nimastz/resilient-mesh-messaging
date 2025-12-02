@@ -1,20 +1,27 @@
 # services/routing_service/router.py
-import json
+# test: pytest services/routing_service/tests/routing_stress_tests.py -v
+from __future__ import annotations
+
 import asyncio
-import httpx
-import yaml
-from pathlib import Path
+import json
 from datetime import datetime, timezone
 from math import pow
+from pathlib import Path
+
+import httpx
+import yaml
 
 from lib.envelope import MessageEnvelope
 from .db import get_outgoing, mark_delivered, mark_dropped, increment_retry
 
-CONFIG_PATH = Path("config/routing_config.yaml") 
+CONFIG_PATH = Path("config/routing_config.yaml")
 BLE_ADAPTER_URL = "http://localhost:7003/v1/ble/send_chunk"
 
-with CONFIG_PATH.open() as f:
-    ROUTING_CFG = yaml.safe_load(f)
+if CONFIG_PATH.exists():
+    with CONFIG_PATH.open() as f:
+        ROUTING_CFG = yaml.safe_load(f) or {}
+else:
+    ROUTING_CFG = {}
 
 MAX_RETRIES = ROUTING_CFG.get("max_retries", 5)
 BASE_BACKOFF_MS = ROUTING_CFG.get("base_retry_backoff_ms", 500)
@@ -22,11 +29,14 @@ MAX_TTL = ROUTING_CFG.get("max_ttl", 8)
 
 
 def _parse_timestamp(ts: str) -> datetime:
-    # SQLite CURRENT_TIMESTAMP -> 'YYYY-MM-DD HH:MM:SS'
+    # SQLite CURRENT_TIMESTAMP -> 'YYYY-MM-DD HH:MM:SS' (ISO-compatible)
     return datetime.fromisoformat(ts)
 
 
 def _should_retry(row: dict) -> bool:
+    """
+    Exponential backoff based on retries + last_update.
+    """
     retries = row["retries"]
     last_update = _parse_timestamp(row["last_update"])
 
@@ -34,12 +44,14 @@ def _should_retry(row: dict) -> bool:
         return True
 
     backoff_ms = BASE_BACKOFF_MS * pow(2, retries - 1)
-    elapsed = (datetime.now(timezone.utc) - last_update.replace(tzinfo=timezone.utc)).total_seconds() * 1000
+    elapsed_ms = (
+        datetime.now(timezone.utc) - last_update.replace(tzinfo=timezone.utc)
+    ).total_seconds() * 1000.0
 
-    return elapsed >= backoff_ms
+    return elapsed_ms >= backoff_ms
 
 
-async def process_outgoing_queue():
+async def process_outgoing_queue() -> None:
     rows = get_outgoing()
     if not rows:
         return
@@ -59,7 +71,7 @@ async def process_outgoing_queue():
                 mark_dropped(row_id, reason="invalid_envelope")
                 continue
 
-            # respect global max TTL (defense in depth)
+            # TTL guard (defense in depth)
             if envelope.header.ttl <= 0 or envelope.header.ttl > MAX_TTL:
                 print(f"[Routing] dropping msg {envelope.header.msg_id}: TTL expired")
                 mark_dropped(row_id, reason="ttl_expired")
@@ -96,6 +108,9 @@ async def process_outgoing_queue():
 
 
 async def routing_loop(interval_seconds: float = 2.0):
+    """
+    Background loop polling the routing queue.
+    """
     while True:
         await process_outgoing_queue()
         await asyncio.sleep(interval_seconds)

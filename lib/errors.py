@@ -74,10 +74,12 @@ def make_error(
     detail: str,
     retryable: bool = False,
 ) -> Dict[str, Any]:
-    """
-    Build the shared error JSON body (no HTTP semantics).
-    """
-    payload = ErrorPayload(code=str(code), detail=detail, retryable=retryable)
+    if isinstance(code, ErrorCode):
+        code_str = code.value
+    else:
+        code_str = str(code)
+
+    payload = ErrorPayload(code=code_str, detail=detail, retryable=retryable)
     return payload.to_dict()
 
 
