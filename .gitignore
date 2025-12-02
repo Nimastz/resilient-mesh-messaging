@@ -67,3 +67,9 @@ Thumbs.db
 *.crt
 keystore/
 secrets/
+
+
+
+# Ignore service folder
+services/crypto_service/
+services/ble_adapter
