@@ -1,6 +1,6 @@
 # lib/utils.py
 """
-Shared helper utilities for the mesh messaging project.
+Shared helper utilities for the mesh messaging.
 
 Contains:
 - Base64 helpers
@@ -31,7 +31,7 @@ DEFAULT_NONCE_BYTES = 12
 
 
 # ---------------------------------------------------------------------------
-# Basic helpers
+# helpers
 # ---------------------------------------------------------------------------
 
 def b64encode(data: bytes) -> str:

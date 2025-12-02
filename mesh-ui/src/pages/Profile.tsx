@@ -201,13 +201,6 @@ export default function Profile() {
           </h2>
           <p className="text-violet-600 dark:text-violet-400 font-medium">@{profileUser.username}</p>
         </div>
-
-        <div className="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-slate-900 rounded-full border border-slate-200 dark:border-slate-800 shadow-sm max-w-full">
-           <span className="text-[10px] font-mono text-slate-500 truncate max-w-[200px]">
-             {profileUser.fingerprint}
-           </span>
-           <Copy className="w-3 h-3 text-slate-400 cursor-pointer hover:text-violet-600" onClick={copyToClipboard} />
-        </div>
       </div>
 
       {/* Tabs (Only show Scan tab if it's ME) */}
