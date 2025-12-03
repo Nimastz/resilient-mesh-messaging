@@ -1,3 +1,15 @@
+# -------------------------
+# Python / Backend ignores
+# -------------------------
+venv/
+.venv/
+.env
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+*.pdb
+
 # Logs
 logs
 *.log

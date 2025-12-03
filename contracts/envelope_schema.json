@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MessageEnvelope",
+  "type": "object",
+  "required": ["version", "header", "ciphertext", "chunks", "routing"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "enum": ["1.0"]
+    },
+    "header": {
+      "type": "object",
+      "required": ["sender_fp", "recipient_fp", "msg_id", "nonce", "ttl", "hop_count", "ts"],
+      "properties": {
+        "sender_fp":  { "type": "string", "description": "fingerprint of sender pubkey (base64-32)" },
+        "recipient_fp": { "type": "string", "description": "fingerprint of recipient pubkey (base64-32)" },
+        "msg_id": { "type": "string", "description": "message UUID v4" },
+        "nonce": { "type": "string", "description": "AES-GCM nonce base64-12" },
+        "ttl": { "type": "integer", "minimum": 0, "description": "remaining hops" },
+        "hop_count": { "type": "integer", "minimum": 0, "description": "hops already taken" },
+        "ts": { "type": "integer", "description": "unix timestamp (seconds) for replay bounds" }
+      }
+    },
+    "ciphertext": {
+      "type": "string",
+      "description": "AES-GCM ciphertext (base64, includes tag)"
+    },
+    "chunks": {
+      "type": "object",
+      "required": ["index", "total"],
+      "properties": {
+        "index": { "type": "integer", "minimum": 0 },
+        "total": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "routing": {
+      "type": "object",
+      "required": ["priority", "dup_suppress"],
+      "properties": {
+        "priority": {
+          "type": "string",
+          "enum": ["low", "normal", "high"]
+        },
+        "dup_suppress": {
+          "type": "boolean",
+          "description": "whether duplicates should be suppressed by routers"
+        }
+      }
+    }
+  }
+}
