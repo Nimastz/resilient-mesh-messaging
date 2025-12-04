@@ -1,5 +1,5 @@
 # services/routing_service/test/routing_test.py
-
+# pytest services/routing_service/test/routing_ids.py -v
 import time
 import uuid
 import httpx
