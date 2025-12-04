@@ -54,26 +54,25 @@ def _base_auth(request: Request) -> str:
     """
     Core device auth: verify headers + token.
 
-    We apply a global auth-level rate limit per client IP first.
-    If that passes, we then validate device credentials.
+    Global auth-level rate limiting is applied only to *failed* attempts,
+    so normal traffic with valid credentials is not throttled.
     """
     client_ip = request.client.host or "unknown"
     bucket = f"auth:{client_ip}"
 
-    # Global auth-level rate limiting (per IP)
-    if is_rate_limited(bucket):
-        raise http_error(
-            status_code=429,
-            code=ErrorCode.UNAUTHORIZED,
-            detail="Too many auth attempts for this device",
-            retryable=True,
-        )
-
     device_fp = request.headers.get(DEVICE_FP_HEADER)
     token = request.headers.get(DEVICE_TOKEN_HEADER)
 
+    # --- Missing headers → failed auth attempt ---
     if not device_fp or not token:
-        # Missing headers – fail fast (rate limit already applied above)
+        # Count this failure against the auth bucket
+        if is_rate_limited(bucket):
+            raise http_error(
+                status_code=429,
+                code=ErrorCode.UNAUTHORIZED,
+                detail="Too many auth attempts for this device",
+                retryable=True,
+            )
         raise http_error(
             status_code=401,
             code=ErrorCode.UNAUTHORIZED,
@@ -83,7 +82,14 @@ def _base_auth(request: Request) -> str:
 
     dev_info = DEV_DEVICES.get(device_fp)
     if not dev_info or not verify_api_token(token, dev_info["token_hash"]):
-        # Wrong credentials – same story, but we don’t call rate-limiter again
+        # Invalid credentials → also count as failed attempt
+        if is_rate_limited(bucket):
+            raise http_error(
+                status_code=429,
+                code=ErrorCode.UNAUTHORIZED,
+                detail="Too many auth attempts for this device",
+                retryable=True,
+            )
         raise http_error(
             status_code=401,
             code=ErrorCode.UNAUTHORIZED,
@@ -91,7 +97,7 @@ def _base_auth(request: Request) -> str:
             retryable=False,
         )
 
-    # Success path – this request passed both rate limit and auth
+    # Success path – valid credentials, no auth rate limiting applied
     return device_fp
 
 
