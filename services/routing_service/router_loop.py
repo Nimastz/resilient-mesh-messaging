@@ -2,27 +2,18 @@
 # drains the SQLite queue and forwards messages to the BLE adapter with TTL + retry logic.
 
 from __future__ import annotations
-
+import random
 import asyncio
 import json
 from datetime import datetime, timezone
 from math import pow
-from pathlib import Path
-
+from .config_loader import ROUTING_CFG
 import httpx
-import yaml
 
 from lib.envelope import MessageEnvelope
 from .router_db import get_outgoing, mark_delivered, mark_dropped, increment_retry
 
-CONFIG_PATH = Path("config/routing_config.yaml")
 BLE_ADAPTER_URL = "http://localhost:7003/v1/ble/send_chunk"
-
-if CONFIG_PATH.exists():
-    with CONFIG_PATH.open() as f:
-        ROUTING_CFG = yaml.safe_load(f) or {}
-else:
-    ROUTING_CFG = {}
 
 MAX_RETRIES = ROUTING_CFG.get("max_retries", 5)
 BASE_BACKOFF_MS = ROUTING_CFG.get("base_retry_backoff_ms", 500)
@@ -45,6 +36,12 @@ def _should_retry(row: dict) -> bool:
         return True
 
     backoff_ms = BASE_BACKOFF_MS * pow(2, retries - 1)
+
+    # Add jitter from config
+    jitter = ROUTING_CFG.get("retry_jitter_ms", 0)
+    if jitter > 0:
+        backoff_ms += random.randint(0, jitter)
+        
     elapsed_ms = (
         datetime.now(timezone.utc) - last_update.replace(tzinfo=timezone.utc)
     ).total_seconds() * 1000.0

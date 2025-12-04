@@ -320,3 +320,15 @@
 {"ts": "2025-12-04T02:41:49.367378+00:00", "event": "TTL_EXPIRED", "peer": "peer-partitioned", "msg_id": "a93e5ae7-ced0-4c8f-93d3-1b0d98ec013a", "detail": "received with ttl <= 0", "extra": {}}
 {"ts": "2025-12-04T02:41:49.371345+00:00", "event": "TTL_EXPIRED", "peer": "peer-partitioned", "msg_id": "2072eb1d-2514-4575-9e24-642e61a424eb", "detail": "received with ttl <= 0", "extra": {}}
 {"ts": "2025-12-04T02:41:49.375587+00:00", "event": "TTL_EXPIRED", "peer": "peer-partitioned", "msg_id": "9d74ae0d-d45b-4d0e-a0a7-65a326b3cdc5", "detail": "received with ttl <= 0", "extra": {}}
+{"ts": "2025-12-04T04:28:28.302340+00:00", "event": "TEST", "peer": "evil-peer", "msg_id": "msg-0", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T04:28:28.302723+00:00", "event": "TEST", "peer": "evil-peer", "msg_id": "msg-1", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T04:28:28.303041+00:00", "event": "TEST", "peer": "evil-peer", "msg_id": "msg-2", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T04:58:46.688625+00:00", "event": "TEST", "peer": "evil-peer", "msg_id": "msg-0", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T04:58:46.688991+00:00", "event": "TEST", "peer": "evil-peer", "msg_id": "msg-1", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T04:58:46.689231+00:00", "event": "TEST", "peer": "evil-peer", "msg_id": "msg-2", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T05:12:11.122426+00:00", "event": "TEST", "peer": "evil-peer", "msg_id": "msg-0", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T05:12:11.122863+00:00", "event": "TEST", "peer": "evil-peer", "msg_id": "msg-1", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T05:12:11.123132+00:00", "event": "TEST", "peer": "evil-peer", "msg_id": "msg-2", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T05:56:22.380781+00:00", "event": "TEST", "peer": "evil-peer", "msg_id": "msg-0", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T05:56:22.381136+00:00", "event": "TEST", "peer": "evil-peer", "msg_id": "msg-1", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T05:56:22.381392+00:00", "event": "TEST", "peer": "evil-peer", "msg_id": "msg-2", "detail": "test event", "extra": {}}

@@ -1,8 +1,27 @@
-max_retries: 5
-base_retry_backoff_ms: 500
-max_ttl: 8
-drop_on_duplicate: true
+# -----------------------------
+# Routing / Retry Configuration
+# -----------------------------
 
+max_retries: 5                   # maximum resend attempts before dropping a message
+base_retry_backoff_ms: 500       # base delay for exponential backoff (doubles each retry)
+retry_jitter_ms: 200             # small random jitter added to backoff to avoid synchronized bursts
+max_queue_size: 5000             # caps total pending messages allowed in the routing queue
+
+# TTL configuration
+ttl_min: 1                       # lowest allowed TTL value accepted from clients
+ttl_default: 4                   # default TTL applied when a client does not provide one
+max_ttl: 8                       # highest allowed TTL before rejecting a message
+
+drop_on_duplicate: true          # enables duplicate suppression based on seen msg_ids
+
+forwarding_enabled: false        # enables multi-hop forwarding when set to true
+
+# -----------------------------
+# IDS Configuration
+# -----------------------------
 ids:
-  window_seconds: 5
-  max_msgs_per_window: 20
+  window_seconds: 5              # size of the rate-limit sliding window (in seconds)
+  max_msgs_per_window: 20        # maximum messages allowed per peer inside the window
+
+  duplicate_suppression_ttl: 600 # how long (in seconds) to remember msg_ids for deduplication
+  block_peer_after: 15           # number of suspicious events after which a peer is temporarily blocked

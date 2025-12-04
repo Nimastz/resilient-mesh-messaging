@@ -7,12 +7,12 @@ import asyncio
 import json
 from pathlib import Path
 from typing import Optional
-
-from fastapi import FastAPI, Request, Depends
-
+from .config_loader import ROUTING_CFG
 from lib.utils import hash_token 
 from lib.envelope import MessageEnvelope
 from lib.errors import http_error, ErrorCode
+from contextlib import asynccontextmanager
+from fastapi import FastAPI, Request, Depends
 from lib.auth import DEVICE_FP_HEADER, DEVICE_TOKEN_HEADER, verify_api_token
 from .router_db import init_db, enqueue_message, get_outgoing, mark_delivered
 from .router_loop import routing_loop
@@ -66,17 +66,19 @@ def require_device_auth(request: Request) -> str:
 # Startup
 # ---------------------------------------------------------------------------
 
-
-@app.on_event("startup")
-async def startup() -> None:
+@asynccontextmanager
+async def lifespan(app: FastAPI):
     """
-    Boot routing service:
-    - init SQLite queue
-    - start background routing loop
+    FastAPI lifespan handler to replace deprecated @app.on_event("startup").
+    Runs once when the app starts.
     """
     init_db()
     asyncio.create_task(routing_loop(interval_seconds=2.0))
+    yield
+    # optional: add shutdown cleanup here if needed
 
+
+app = FastAPI(lifespan=lifespan)
 
 # ---------------------------------------------------------------------------
 # Endpoints
@@ -88,29 +90,37 @@ def api_enqueue(
     envelope: MessageEnvelope,
     device_fp: str = Depends(require_device_auth),
 ):
-    """
-    Crypto → Router entrypoint.
+    msg_id = envelope.header.msg_id
+    ttl = envelope.header.ttl
 
-    In:  <MessageEnvelope JSON>  (matches lib/envelope.py + envelope_schema.json)
-    Out: { "queued": true, "msg_id": "uuid" }
+    ttl_min = ROUTING_CFG.get("ttl_min", 1)
+    ttl_default = ROUTING_CFG.get("ttl_default", 4)
+    ttl_max = ROUTING_CFG.get("max_ttl", 8)
 
-    Errors:
-      - 500 DB_ERROR
-    """
+    if ttl is None:
+        ttl = ttl_default
+        envelope.header.ttl = ttl  
+
+    if ttl < ttl_min or ttl > ttl_max:
+        raise http_error(
+            400,
+            ErrorCode.INVALID_INPUT,
+            f"ttl must be between {ttl_min} and {ttl_max}",
+            retryable=False,
+        )
+    envelope.header.ttl = ttl
+    envelope_json = envelope.model_dump_json()
+
     try:
-        envelope_json = envelope.json()
-        msg_id = envelope.header.msg_id
-        ttl = envelope.header.ttl
         enqueue_message(msg_id, envelope_json, ttl)
-        return {"queued": True, "msg_id": msg_id}
     except Exception as e:
-        # Standard Day-0 error body via lib.errors
         raise http_error(
             status_code=500,
             code=ErrorCode.DB_ERROR,
             detail=f"Failed to enqueue: {e}",
             retryable=False,
         )
+    return {"queued": True, "msg_id": msg_id}
 
 
 @app.get("/v1/router/outgoing_chunks")
@@ -196,9 +206,9 @@ def api_on_chunk_received(
     """
     link_meta = payload.get("link_meta") or {}
     peer = link_meta.get("peer", "unknown")
-
+    
     try:
-        env = MessageEnvelope.parse_obj(payload["chunk"])
+        env = MessageEnvelope.model_validate(payload["chunk"])
     except Exception:
         log_suspicious("INVALID_ENVELOPE", peer, "unknown", "failed to parse envelope")
         raise http_error(
@@ -233,8 +243,12 @@ def api_on_chunk_received(
         return {"accepted": False, "action": "drop"}
 
     # Phase-1 behavior: final delivery to this node only.
+    # Phase-2 multi-hop behavior with one config flag.
     # Phase-2/3 could enqueue for multi-hop forwarding.
-    return {"accepted": True, "action": "final"}
+    if ROUTING_CFG.get("forwarding_enabled", False):
+        return {"accepted": True, "action": "forward"}
+    else:
+        return {"accepted": True, "action": "final"}
 
 
 @app.get("/v1/router/queue_debug")

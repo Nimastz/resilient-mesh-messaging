@@ -1,10 +1,10 @@
 # services/routing_service/test/routing_test.py
 # pytest services/routing_service/test/routing_ids.py -v
+# uvicorn services.routing_service.routing_api:app --host 0.0.0.0 --port 09001 --reload
 import time
 import uuid
 import httpx
 import pytest
-
 from lib.envelope import MessageEnvelope, EnvelopeHeader, ChunkInfo, RoutingMeta
 
 
@@ -37,7 +37,7 @@ def make_envelope(sender_fp: str, recipient_fp: str, ttl: int = 5) -> MessageEnv
     )
     return MessageEnvelope(
         header=header,
-        ciphertext="deadbeef",  # placeholder AES-GCM ciphertext
+        ciphertext="deadbeef",  # placeholder AES-GCM ciphertext     
         chunks=ChunkInfo(),
         routing=RoutingMeta(),
     )
