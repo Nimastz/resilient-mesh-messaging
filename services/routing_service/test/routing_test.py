@@ -1,23 +1,4 @@
-# services/tests/routing_stress_tests.py
-# python -m services.routing_service.main
-# test: pytest services/routing_service/tests/routing_stress_tests.py -v
-"""
-Integration-style stress tests for the routing service (Person 2).
-
-These tests exercise:
-- message storm → rate limiting / IDS
-- node churn → different peers sending a few messages
-- partitions → TTL=0 messages should be dropped with TTL_EXPIRED
-
-They assume the routing service is running on:
-    http://localhost:9002
-
-Start it with:
-    python -m services.routing_service.main
-
-Then run:
-    pytest services/routing_service/tests/test_routing_stress.py -v
-"""
+# services/routing_service/test/routing_test.py
 
 import time
 import uuid
@@ -28,6 +9,15 @@ from lib.envelope import MessageEnvelope, EnvelopeHeader, ChunkInfo, RoutingMeta
 
 
 ROUTER_BASE = "http://localhost:9002"  # adjust if you change the port
+
+# Must match DEV_DEVICE_FP / DEV_DEVICE_TOKEN in routing_api
+DEVICE_FP = "DEV-ROUTER-CLIENT"
+DEVICE_TOKEN = "dev-router-token"
+
+AUTH_HEADERS = {
+    "X-Device-Fp": DEVICE_FP,
+    "X-Device-Token": DEVICE_TOKEN,
+}
 
 
 def _now_ts() -> int:
@@ -59,7 +49,10 @@ async def _ensure_router_or_skip():
     """
     async with httpx.AsyncClient(timeout=3.0) as client:
         try:
-            r = await client.get(f"{ROUTER_BASE}/v1/router/stats")
+            r = await client.get(
+                f"{ROUTER_BASE}/v1/router/stats",
+                headers=AUTH_HEADERS,
+            )
         except Exception as e:
             pytest.skip(f"Router service not running on {ROUTER_BASE}: {e}")
 
@@ -90,7 +83,11 @@ async def test_message_storm_triggers_rate_limit():
                 "chunk": env.model_dump(),
                 "link_meta": {"peer": peer, "rssi": -40},
             }
-            r = await client.post(f"{ROUTER_BASE}/v1/router/on_chunk_received", json=payload)
+            r = await client.post(
+                f"{ROUTER_BASE}/v1/router/on_chunk_received",
+                headers=AUTH_HEADERS,
+                json=payload,
+            )
             assert r.status_code == 200, f"Unexpected status: {r.status_code} {r.text}"
             body = r.json()
             if body.get("accepted"):
@@ -128,7 +125,11 @@ async def test_node_churn_multiple_peers_ok():
                     "chunk": env.model_dump(),
                     "link_meta": {"peer": peer, "rssi": -60},
                 }
-                r = await client.post(f"{ROUTER_BASE}/v1/router/on_chunk_received", json=payload)
+                r = await client.post(
+                    f"{ROUTER_BASE}/v1/router/on_chunk_received",
+                    headers=AUTH_HEADERS,
+                    json=payload,
+                )
                 assert r.status_code == 200, f"Node churn: {peer} got {r.status_code} {r.text}"
                 body = r.json()
                 if body.get("accepted"):
@@ -164,7 +165,11 @@ async def test_partition_ttl_expired():
                 "chunk": env.model_dump(),
                 "link_meta": {"peer": "peer-partitioned", "rssi": -90},
             }
-            r = await client.post(f"{ROUTER_BASE}/v1/router/on_chunk_received", json=payload)
+            r = await client.post(
+                f"{ROUTER_BASE}/v1/router/on_chunk_received",
+                headers=AUTH_HEADERS,
+                json=payload,
+            )
             assert r.status_code == 410, (
                 f"Expected 410 TTL_EXPIRED, got {r.status_code} {r.text}"
             )

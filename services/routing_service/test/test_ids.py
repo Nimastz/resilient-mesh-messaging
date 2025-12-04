@@ -1,7 +1,8 @@
-# services/tests/ids.py
-# test: pytest services/routing_service/tests/test_ids.py -v
+# services/test/ids.py
+# unit test for the IDS helpers.
+# test: pytest services/routing_service/test/test_ids.py -v
 import time
-from services.routing_service.ids import is_duplicate, is_rate_limited
+from services.routing_service.ids_module import is_duplicate, is_rate_limited
 
 def test_duplicate_detection():
     msg_id = "abc123"

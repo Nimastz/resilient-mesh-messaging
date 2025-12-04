@@ -6,6 +6,9 @@ import os
 import uuid
 from datetime import datetime, timedelta, timezone
 from typing import Tuple, Optional
+from lib.utils import fingerprint_bytes
+
+
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import x25519
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
@@ -57,10 +60,7 @@ def load_or_create_identity() -> dict:
     )
 
     # fingerprint = SHA-256(public_key) truncated
-    digest = hashes.Hash(hashes.SHA256())
-    digest.update(pub_bytes)
-    full = digest.finalize()
-    fp = base64.b64encode(full[:16]).decode()  # 128-bit fingerprint
+    fp = fingerprint_bytes(pub_bytes, out_len=16)   # 16 bytes = 128-bit fingerprint
 
     created_at = _now().isoformat()
 

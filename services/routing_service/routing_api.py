@@ -1,4 +1,6 @@
-# services/routing_service/api.py
+# services/routing_service/routing_api.py
+# takes envelopes in, checks TTL / IDS, and talks to the DB + router loop.
+
 from __future__ import annotations
 
 import asyncio
@@ -6,18 +8,63 @@ import json
 from pathlib import Path
 from typing import Optional
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, Depends
 
+from lib.utils import hash_token 
 from lib.envelope import MessageEnvelope
 from lib.errors import http_error, ErrorCode
+from lib.auth import DEVICE_FP_HEADER, DEVICE_TOKEN_HEADER, verify_api_token
+from .router_db import init_db, enqueue_message, get_outgoing, mark_delivered
+from .router_loop import routing_loop
+from .ids_module import is_rate_limited, is_duplicate, log_suspicious
 
-from .db import init_db, enqueue_message, get_outgoing, mark_delivered
-from .router import routing_loop
-from .ids import is_rate_limited, is_duplicate, log_suspicious
 
 IDS_LOG_PATH = Path("routing_suspicious.log")
 
 app = FastAPI()
+
+# ---------------------------------------------------------------------------
+# Device auth
+# ---------------------------------------------------------------------------
+
+# Simple dev credential for now; in production this would come from a device DB.
+DEV_DEVICE_FP = "DEV-ROUTER-CLIENT"
+DEV_DEVICE_TOKEN = "dev-router-token"
+DEV_DEVICE_TOKEN_HASH = hash_token(DEV_DEVICE_TOKEN)
+
+
+def require_device_auth(request: Request) -> str:
+    """
+    Require X-Device-Fp and X-Device-Token headers and verify token.
+
+    Returns the device fingerprint if successful.
+    """
+    device_fp = request.headers.get(DEVICE_FP_HEADER)
+    token = request.headers.get(DEVICE_TOKEN_HEADER)
+
+    if not device_fp or not token:
+        raise http_error(
+            status_code=401,
+            code=ErrorCode.UNAUTHORIZED,
+            detail="Missing device auth headers",
+            retryable=False,
+        )
+
+    # For now we only accept the single dev credential.
+    if device_fp != DEV_DEVICE_FP or not verify_api_token(token, DEV_DEVICE_TOKEN_HASH):
+        raise http_error(
+            status_code=401,
+            code=ErrorCode.UNAUTHORIZED,
+            detail="Invalid device credentials",
+            retryable=False,
+        )
+
+    return device_fp
+
+
+# ---------------------------------------------------------------------------
+# Startup
+# ---------------------------------------------------------------------------
 
 
 @app.on_event("startup")
@@ -31,8 +78,16 @@ async def startup() -> None:
     asyncio.create_task(routing_loop(interval_seconds=2.0))
 
 
+# ---------------------------------------------------------------------------
+# Endpoints
+# ---------------------------------------------------------------------------
+
+
 @app.post("/v1/router/enqueue")
-def api_enqueue(envelope: MessageEnvelope):
+def api_enqueue(
+    envelope: MessageEnvelope,
+    device_fp: str = Depends(require_device_auth),
+):
     """
     Crypto → Router entrypoint.
 
@@ -59,7 +114,10 @@ def api_enqueue(envelope: MessageEnvelope):
 
 
 @app.get("/v1/router/outgoing_chunks")
-def api_outgoing(limit: Optional[int] = 50):
+def api_outgoing(
+    limit: Optional[int] = 50,
+    device_fp: str = Depends(require_device_auth),
+):
     """
     Internal API for BLE adapter / router debugging.
 
@@ -88,7 +146,10 @@ def api_outgoing(limit: Optional[int] = 50):
 
 
 @app.post("/v1/router/mark_delivered")
-def api_mark(payload: dict):
+def api_mark(
+    payload: dict,
+    device_fp: str = Depends(require_device_auth),
+):
     """
     BLE adapter / higher layer tells router a queue row was delivered.
 
@@ -112,7 +173,10 @@ def api_mark(payload: dict):
 
 
 @app.post("/v1/router/on_chunk_received")
-def api_on_chunk_received(payload: dict):
+def api_on_chunk_received(
+    payload: dict,
+    device_fp: str = Depends(require_device_auth),
+):
     """
     BLE → Router callback for *incoming* wireless chunks.
 
@@ -146,7 +210,7 @@ def api_on_chunk_received(payload: dict):
 
     msg_id = env.header.msg_id
 
-    # TTL guard on ingress
+    # TTL guard on ingress (defense in depth with router TTL checks)
     if env.header.ttl <= 0:
         log_suspicious("TTL_EXPIRED", peer, msg_id, "received with ttl <= 0")
         raise http_error(
@@ -174,7 +238,9 @@ def api_on_chunk_received(payload: dict):
 
 
 @app.get("/v1/router/queue_debug")
-def api_queue_debug():
+def api_queue_debug(
+    device_fp: str = Depends(require_device_auth),
+):
     """
     Admin/debug endpoint to inspect the raw queue rows.
     """
@@ -182,7 +248,9 @@ def api_queue_debug():
 
 
 @app.get("/v1/router/stats")
-def api_stats():
+def api_stats(
+    device_fp: str = Depends(require_device_auth),
+):
     """
     Simple stats endpoint for UI / metrics:
       - total_queued
@@ -195,11 +263,15 @@ def api_stats():
 
 
 @app.get("/v1/router/ids_log_tail")
-def api_ids_log_tail(limit: int = 50):
+def api_ids_log_tail(
+    limit: int = 50,
+    device_fp: str = Depends(require_device_auth),
+):
     """
     Return last N suspicious IDS events (JSON-lines file).
 
-    NOTE: In a real system, protect this with auth.
+    In a real system this must be protected with auth; we require the
+    same device auth as other endpoints.
     """
     if not IDS_LOG_PATH.exists():
         return {"events": []}

@@ -8,6 +8,8 @@ Contains:
 - UNIX timestamp helper
 - Public-key fingerprint helper
 - Convenience function to build a MessageEnvelope skeleton
+- TTL / priority validation helpers
+- Secure token helpers for per-device API auth
 """
 
 from __future__ import annotations
@@ -26,12 +28,23 @@ from .envelope import (
     RoutingMeta,
 )
 
+# ---------------------------------------------------------------------------
+# Constants
+# ---------------------------------------------------------------------------
+
 # Default AES-GCM nonce size for this project: 96-bit (12 bytes)
 DEFAULT_NONCE_BYTES = 12
 
+# TTL bounds (defensive, fail-closed)
+# We allow 0 so that a message can be "delivered locally" but never forwarded.
+MIN_TTL = 0
+MAX_TTL = 32  # enough for multi-hop, small enough to limit abuse
+
+ALLOWED_PRIORITIES = {"low", "normal", "high"}
+
 
 # ---------------------------------------------------------------------------
-# helpers
+# Base64 helpers
 # ---------------------------------------------------------------------------
 
 def b64encode(data: bytes) -> str:
@@ -44,6 +57,10 @@ def b64decode(data_b64: str) -> bytes:
     return base64.b64decode(data_b64.encode("ascii"))
 
 
+# ---------------------------------------------------------------------------
+# Random IDs / timestamps
+# ---------------------------------------------------------------------------
+
 def generate_nonce(num_bytes: int = DEFAULT_NONCE_BYTES) -> str:
     """
     Generate a cryptographically secure random nonce and return it base64-encoded.
@@ -54,18 +71,18 @@ def generate_nonce(num_bytes: int = DEFAULT_NONCE_BYTES) -> str:
 
 
 def generate_msg_id() -> str:
-    """
-    Generate a UUIDv4 string for msg_id.
-    """
+    """Generate a UUIDv4 string for msg_id."""
     return str(uuid.uuid4())
 
 
 def current_unix_ts() -> int:
-    """
-    Return current UNIX timestamp (seconds since epoch, UTC).
-    """
+    """Return current UNIX timestamp (seconds since epoch, UTC)."""
     return int(time.time())
 
+
+# ---------------------------------------------------------------------------
+# Fingerprints / tokens
+# ---------------------------------------------------------------------------
 
 def fingerprint_bytes(data: bytes, out_len: int = 32) -> str:
     """
@@ -77,6 +94,28 @@ def fingerprint_bytes(data: bytes, out_len: int = 32) -> str:
     digest = hashlib.sha256(data).digest()
     truncated = digest[:out_len]
     return b64encode(truncated)
+
+
+def generate_api_token(num_bytes: int = 32) -> str:
+    """
+    Generate a high-entropy API token for authenticating a device to a service.
+
+    Returns a URL-safe base64 string without padding. The *plaintext* token
+    should be shown only once to the client; services should store only a hash.
+    """
+    raw = os.urandom(num_bytes)
+    token = base64.urlsafe_b64encode(raw).decode("ascii").rstrip("=")
+    return token
+
+
+def hash_token(token: str) -> str:
+    """
+    Compute a SHA-256 hash of an API token.
+
+    We store only the hex-encoded hash server-side; the plaintext token
+    is held by the client. This avoids leaking secrets in logs/dumps.
+    """
+    return hashlib.sha256(token.encode("utf-8")).hexdigest()
 
 
 # ---------------------------------------------------------------------------
@@ -105,6 +144,7 @@ def build_envelope(
     It does NOT perform encryption itself – ciphertext_b64 should already
     contain AES-GCM ciphertext+tag encoded in base64.
     """
+
     if nonce_b64 is None:
         nonce_b64 = generate_nonce()
     if msg_id is None:
@@ -136,16 +176,24 @@ def build_envelope(
 
 def validate_ttl(ttl: int) -> None:
     """
-    Simple defensive check for TTLs.
+    Defensive check for TTLs (remaining hops).
+
+    - Must be an int
+    - Must be between MIN_TTL and MAX_TTL inclusive
+
     Raises ValueError if invalid.
     """
-    if ttl < 0:
-        raise ValueError("ttl must be non-negative")
+    if not isinstance(ttl, int):
+        raise ValueError("ttl must be an integer")
+    if ttl < MIN_TTL or ttl > MAX_TTL:
+        raise ValueError(f"ttl must be between {MIN_TTL} and {MAX_TTL} (got {ttl})")
 
 
 def validate_priority(priority: str) -> None:
     """
-    Validate routing priority field.
+    Validate routing priority field (fail-closed).
+
+    Raises ValueError if invalid.
     """
-    if priority not in ("normal", "high", "low"):
-        raise ValueError(f"invalid priority: {priority}")
+    if priority not in ALLOWED_PRIORITIES:
+        raise ValueError(f"invalid priority: {priority!r}, allowed={sorted(ALLOWED_PRIORITIES)}")

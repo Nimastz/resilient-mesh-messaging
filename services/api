@@ -3,7 +3,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-from .crypto_core import (
+from crypto_service.crypto_core import (
     load_or_create_identity,
     derive_session,
     encrypt_with_session,

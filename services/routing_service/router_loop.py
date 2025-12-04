@@ -1,5 +1,6 @@
-# services/routing_service/router.py
-# test: pytest services/routing_service/tests/routing_stress_tests.py -v
+# services/routing_service/router_loop.py
+# drains the SQLite queue and forwards messages to the BLE adapter with TTL + retry logic.
+
 from __future__ import annotations
 
 import asyncio
@@ -12,7 +13,7 @@ import httpx
 import yaml
 
 from lib.envelope import MessageEnvelope
-from .db import get_outgoing, mark_delivered, mark_dropped, increment_retry
+from .router_db import get_outgoing, mark_delivered, mark_dropped, increment_retry
 
 CONFIG_PATH = Path("config/routing_config.yaml")
 BLE_ADAPTER_URL = "http://localhost:7003/v1/ble/send_chunk"

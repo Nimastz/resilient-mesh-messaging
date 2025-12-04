@@ -1,4 +1,4 @@
-# run:  pytest contracts/day0_contract_test.py
+# run:  pytest contracts/day0_contract_test.py -v
 import json
 import httpx
 import jsonschema

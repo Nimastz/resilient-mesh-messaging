@@ -36,6 +36,9 @@ class ErrorCode(str, Enum):
     # Crypto / session specific
     INVALID_SESSION = "INVALID_SESSION"
     AUTH_FAILED = "AUTH_FAILED"
+    KEY_DERIVE_FAILED = "KEY_DERIVE_FAILED"
+    ENCRYPT_ERROR = "ENCRYPT_ERROR"
+    DECRYPT_ERROR = "DECRYPT_ERROR"
 
     # Routing / TTL specific
     TTL_EXPIRED = "TTL_EXPIRED"

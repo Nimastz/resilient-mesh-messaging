@@ -1,5 +1,5 @@
 # services/routing_service/ids.py
-# test: pytest services/routing_service/tests/test_ids.py -v
+# does per-peer rate limiting + duplicate detection + suspicious logging, configurable via YAML.
 
 """
 Routing IDS / anomaly detection for Person 2.
