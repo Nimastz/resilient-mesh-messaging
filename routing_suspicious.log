@@ -270,3 +270,53 @@
 {"ts": "2025-12-03T11:04:24.569615+00:00", "event": "TTL_EXPIRED", "peer": "peer-partitioned", "msg_id": "abf0016a-3cbe-441f-9a8a-16d678889c4d", "detail": "received with ttl <= 0", "extra": {}}
 {"ts": "2025-12-03T11:04:24.573757+00:00", "event": "TTL_EXPIRED", "peer": "peer-partitioned", "msg_id": "59aef49a-db6b-4860-97e8-5f9fce97ab39", "detail": "received with ttl <= 0", "extra": {}}
 {"ts": "2025-12-03T11:04:24.578060+00:00", "event": "TTL_EXPIRED", "peer": "peer-partitioned", "msg_id": "b015da85-9766-4d88-a2fc-353335e46d73", "detail": "received with ttl <= 0", "extra": {}}
+{"ts": "2025-12-04T02:40:01.552104+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "681766f9-8562-4413-885b-b78960fdf1cf", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:40:01.555419+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "a6fed828-7562-49f0-b1b3-9f7d09465bf7", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:40:01.558936+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "0c04df4b-9cde-4d7e-9a01-27e38640c941", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:40:01.562226+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "75e4377d-4905-43f3-a0b2-976718df724a", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:40:01.565785+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "08bb447a-24e2-4741-ab88-ea6b482414d6", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:40:01.568945+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "c3f3b272-97a9-4eac-892d-a41b64117568", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:40:01.572638+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "f9487f3a-ecd0-43a8-92de-ed2a61755f66", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:40:01.575501+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "ddf9ad01-2339-41ed-affa-d830c519f19a", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:40:01.578572+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "b59fdc49-8afd-43b2-a132-17c9b3c10f00", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:40:01.581727+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "d22f506f-1625-491f-875a-d62779e29eb0", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:40:01.585134+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "f24dc09b-379d-411c-b728-c2d6145bafc7", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:40:01.588332+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "eb51e71e-294b-435e-9768-7ab1ae3db5d0", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:40:01.592048+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "7432123b-9a1a-4f1f-981c-6630c6202628", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:40:01.595208+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "047b453d-44b3-43ff-911d-9afe3f66493a", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:40:01.598662+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "98cefb61-5794-49e8-b719-63ff2fda8e42", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:40:01.602085+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "2d540177-06dd-4193-924f-fcfa1a6e5776", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:40:01.605140+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "e0a883f5-18eb-4eea-b733-59d33d7d58ff", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:40:01.608439+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "ef789ba5-64c5-41e3-9050-38490a9b6514", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:40:01.611314+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "4cc5cbf7-fc8d-49d3-9d71-dea65580bd8a", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:40:01.615184+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "cf06115c-bc78-4086-a9fa-0b1f37262a93", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:40:04.040515+00:00", "event": "TTL_EXPIRED", "peer": "peer-partitioned", "msg_id": "fa5c12f5-2524-4866-a861-ae150adcb1b8", "detail": "received with ttl <= 0", "extra": {}}
+{"ts": "2025-12-04T02:40:04.045508+00:00", "event": "TTL_EXPIRED", "peer": "peer-partitioned", "msg_id": "16a23c34-29a9-494b-b956-088e6739bc7a", "detail": "received with ttl <= 0", "extra": {}}
+{"ts": "2025-12-04T02:40:04.049715+00:00", "event": "TTL_EXPIRED", "peer": "peer-partitioned", "msg_id": "2452ecf9-5264-42d4-b648-536de207f384", "detail": "received with ttl <= 0", "extra": {}}
+{"ts": "2025-12-04T02:40:04.053727+00:00", "event": "TTL_EXPIRED", "peer": "peer-partitioned", "msg_id": "242173a5-ac10-4816-90ef-081cb25c787c", "detail": "received with ttl <= 0", "extra": {}}
+{"ts": "2025-12-04T02:40:04.057916+00:00", "event": "TTL_EXPIRED", "peer": "peer-partitioned", "msg_id": "7caf45ea-2ace-4197-82b8-2a019278f3b3", "detail": "received with ttl <= 0", "extra": {}}
+{"ts": "2025-12-04T02:41:46.789869+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "47089ca4-fa5a-4ba3-bded-0672f64d3949", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:41:46.793885+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "9abe89d6-8bcb-4f4d-93c6-1b9e24caacb9", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:41:46.798000+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "bf996840-cd11-4fba-b2e8-8176bfc6050f", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:41:46.802089+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "c00a52dd-e8f8-4732-96bb-1aaf44d8c72e", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:41:46.806184+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "211b21fb-faa5-4b0d-a0f0-2ea9b332ec1e", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:41:46.810405+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "d36c75d3-ca54-4f9a-964e-04eb92615e6e", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:41:46.814567+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "5b98861b-43c5-424b-88e3-eb1e7ae39158", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:41:46.818578+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "2a0054ca-becb-4e26-83d7-457f04583c84", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:41:46.822615+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "43144e42-912d-4cc5-9d95-6aad30966f20", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:41:46.826764+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "a48c6484-03c5-4ed4-8a89-7cf1f1effe88", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:41:46.830875+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "3257a410-cbd5-4ce1-bf29-0b4e19befc5a", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:41:46.834797+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "566495c5-485a-43ec-89e7-a5fa2f95ea61", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:41:46.839000+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "31a93220-c347-4f28-8779-bf555cfc9af7", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:41:46.843112+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "ab0b251c-092b-4783-a4f8-6305557b8537", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:41:46.847058+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "bb023092-ec19-4afc-99a9-2a869be7d4c6", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:41:46.851342+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "0ae67901-2503-400f-877e-22a4663e8e69", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:41:46.855204+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "eefafaf7-0656-488d-aa57-4a31f01b671c", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:41:46.859187+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "bc1eb293-62fd-464c-9a7d-2a4d9593b6f9", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:41:46.863371+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "69d0118e-e1c4-4f87-9567-b59065a3bc14", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:41:46.867490+00:00", "event": "RATE_LIMIT", "peer": "stormy-peer", "msg_id": "126e0189-d2db-4f3a-b65a-92987b333c74", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T02:41:49.352386+00:00", "event": "TTL_EXPIRED", "peer": "peer-partitioned", "msg_id": "3644ab99-dbed-449a-9687-f454c83f960a", "detail": "received with ttl <= 0", "extra": {}}
+{"ts": "2025-12-04T02:41:49.363285+00:00", "event": "TTL_EXPIRED", "peer": "peer-partitioned", "msg_id": "0ec5bbf3-340e-4a1b-add0-c95f7921ec0d", "detail": "received with ttl <= 0", "extra": {}}
+{"ts": "2025-12-04T02:41:49.367378+00:00", "event": "TTL_EXPIRED", "peer": "peer-partitioned", "msg_id": "a93e5ae7-ced0-4c8f-93d3-1b0d98ec013a", "detail": "received with ttl <= 0", "extra": {}}
+{"ts": "2025-12-04T02:41:49.371345+00:00", "event": "TTL_EXPIRED", "peer": "peer-partitioned", "msg_id": "2072eb1d-2514-4575-9e24-642e61a424eb", "detail": "received with ttl <= 0", "extra": {}}
+{"ts": "2025-12-04T02:41:49.375587+00:00", "event": "TTL_EXPIRED", "peer": "peer-partitioned", "msg_id": "9d74ae0d-d45b-4d0e-a0a7-65a326b3cdc5", "detail": "received with ttl <= 0", "extra": {}}
