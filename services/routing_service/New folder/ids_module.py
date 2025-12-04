@@ -20,7 +20,6 @@ from .config_loader import ROUTING_CFG
 cfg = ROUTING_CFG.get("ids", {})
 WINDOW_SECONDS = cfg.get("window_seconds", 5)
 MAX_MSGS_PER_WINDOW = cfg.get("max_msgs_per_window", 20)
-BLOCK_PEER_TTL = cfg.get("block_peer_ttl_seconds", 3600)
 
 # in-memory state
 _peer_windows: Dict[str, Deque[datetime]] = defaultdict(deque)
@@ -39,13 +38,7 @@ def is_rate_limited(peer: str) -> bool:
     Sliding-window rate limiting per peer.
     """
     if peer in _blocked_peers:
-        blocked_at = _blocked_peers[peer]
-        if _now() - blocked_at > timedelta(seconds=BLOCK_PEER_TTL):
-            # unblock and reset suspicious count
-            del _blocked_peers[peer]
-            _peer_suspicious_counts[peer] = 0
-        else:
-            return True
+        return True
     
     window = _peer_windows[peer]
     now = _now()

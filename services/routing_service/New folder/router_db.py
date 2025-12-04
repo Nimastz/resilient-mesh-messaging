@@ -29,19 +29,7 @@ def init_db():
     conn.close()
 
 
-def enqueue_message(
-    msg_id: str,
-    envelope_json: str,
-    ttl: int,
-    sender_fp: str | None = None,
-    recipient_fp: str | None = None,
-):
-    """
-    Enqueue a message in the routing DB.
-
-    sender_fp / recipient_fp are accepted for future per-peer quotas / stats
-    but are currently not stored in the schema.
-    """
+def enqueue_message(msg_id: str, envelope_json: str, ttl: int):
     conn = get_connection()
     cur = conn.cursor()
 
@@ -56,7 +44,12 @@ def enqueue_message(
         """
         INSERT INTO queue (msg_id, envelope_json, ttl)
         VALUES (?, ?, ?)
-        ON CONFLICT(msg_id) DO NOTHING
+        ON CONFLICT(msg_id) DO UPDATE SET
+            envelope_json = excluded.envelope_json,
+            ttl = excluded.ttl,
+            status = 'queued',
+            delivered = 0,
+            last_update = CURRENT_TIMESTAMP
         """,
         (msg_id, envelope_json, ttl),
     )
@@ -72,7 +65,7 @@ def get_outgoing() -> List[Dict[str, Any]]:
         """
         SELECT id, msg_id, envelope_json, retries, ttl, status, last_update
         FROM queue
-        WHERE delivered = 0 AND status = 'queued'
+        WHERE delivered = 0
         """
     ).fetchall()
     conn.close()
@@ -114,7 +107,7 @@ def mark_dropped(row_id: int, reason: str = "ttl_expired"):
     cur.execute(
         """
         UPDATE queue
-        SET delivered = 1, status = ?, last_update = CURRENT_TIMESTAMP
+        SET delivered = 0, status = ?, last_update = CURRENT_TIMESTAMP
         WHERE id = ?
         """,
         (reason, row_id),

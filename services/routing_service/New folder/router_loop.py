@@ -7,31 +7,17 @@ import asyncio
 import json
 from datetime import datetime, timezone
 from math import pow
-
+from .config_loader import ROUTING_CFG
 import httpx
 
-from .config_loader import ROUTING_CFG
 from lib.envelope import MessageEnvelope
-from lib.utils import validate_ttl
-from lib.auth import DEVICE_FP_HEADER, DEVICE_TOKEN_HEADER
-
 from .router_db import get_outgoing, mark_delivered, mark_dropped, increment_retry
 
-BLE_ADAPTER_URL = ROUTING_CFG.get(
-    "ble_adapter_url", "http://localhost:7003/v1/ble/send_chunk"
-)
+BLE_ADAPTER_URL = "http://localhost:7003/v1/ble/send_chunk"
 
 MAX_RETRIES = ROUTING_CFG.get("max_retries", 5)
 BASE_BACKOFF_MS = ROUTING_CFG.get("base_retry_backoff_ms", 500)
-
-# Optional: simple auth from router → BLE (can be ignored by BLE if not enabled)
-BLE_DEVICE_FP = ROUTING_CFG.get("ble_device_fp", "DEV-BLE-ADAPTER")
-BLE_DEVICE_TOKEN = ROUTING_CFG.get("ble_device_token", "dev-ble-token")
-
-BLE_AUTH_HEADERS = {
-    DEVICE_FP_HEADER: BLE_DEVICE_FP,
-    DEVICE_TOKEN_HEADER: BLE_DEVICE_TOKEN,
-}
+MAX_TTL = ROUTING_CFG.get("max_ttl", 8)
 
 
 def _parse_timestamp(ts: str) -> datetime:
@@ -55,7 +41,7 @@ def _should_retry(row: dict) -> bool:
     jitter = ROUTING_CFG.get("retry_jitter_ms", 0)
     if jitter > 0:
         backoff_ms += random.randint(0, jitter)
-
+        
     elapsed_ms = (
         datetime.now(timezone.utc) - last_update.replace(tzinfo=timezone.utc)
     ).total_seconds() * 1000.0
@@ -83,27 +69,14 @@ async def process_outgoing_queue() -> None:
                 mark_dropped(row_id, reason="invalid_envelope")
                 continue
 
-            ttl = envelope.header.ttl
-
-            # TTL guard (defense in depth + consistency with validate_ttl)
-            if ttl is None or ttl <= 0:
-                print(f"[Routing] dropping msg {envelope.header.msg_id}: TTL <= 0")
+            # TTL guard (defense in depth)
+            if envelope.header.ttl <= 0 or envelope.header.ttl > MAX_TTL:
+                print(f"[Routing] dropping msg {envelope.header.msg_id}: TTL expired")
                 mark_dropped(row_id, reason="ttl_expired")
                 continue
 
-            try:
-                validate_ttl(ttl)
-            except ValueError as exc:
-                print(
-                    f"[Routing] dropping msg {envelope.header.msg_id}: invalid TTL ({exc})"
-                )
-                mark_dropped(row_id, reason="ttl_invalid")
-                continue
-
             if row["retries"] >= MAX_RETRIES:
-                print(
-                    f"[Routing] dropping msg {envelope.header.msg_id}: max_retries exceeded"
-                )
+                print(f"[Routing] dropping msg {envelope.header.msg_id}: max_retries exceeded")
                 mark_dropped(row_id, reason="max_retries")
                 continue
 
@@ -115,7 +88,6 @@ async def process_outgoing_queue() -> None:
                 resp = await client.post(
                     BLE_ADAPTER_URL,
                     json={"chunk": json.loads(envelope.json())},
-                    headers=BLE_AUTH_HEADERS,
                     timeout=5.0,
                 )
                 if resp.status_code == 200:

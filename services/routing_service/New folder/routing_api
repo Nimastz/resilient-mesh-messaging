@@ -22,11 +22,7 @@ from .router_loop import routing_loop
 from .ids_module import is_rate_limited, is_duplicate, log_suspicious
 
 IDS_LOG_PATH = Path("routing_suspicious.log")
-DEBUG_MODE = os.getenv("ROUTER_DEBUG", "1") == "1"
-
-# Size limits (bytes / characters) – protects against oversized messages
-MAX_ENVELOPE_BYTES = ROUTING_CFG.get("max_envelope_bytes", 16_384)
-MAX_CIPHERTEXT_BYTES = ROUTING_CFG.get("max_ciphertext_bytes", 16_384)
+DEBUG_MODE = os.getenv("ROUTER_DEBUG", "0") == "1"
 
 app = FastAPI()
 
@@ -53,27 +49,11 @@ DEV_DEVICES = {
 def _base_auth(request: Request) -> str:
     """
     Core device auth: verify headers + token.
-
-    We apply a global auth-level rate limit per client IP first.
-    If that passes, we then validate device credentials.
     """
-    client_ip = request.client.host or "unknown"
-    bucket = f"auth:{client_ip}"
-
-    # Global auth-level rate limiting (per IP)
-    if is_rate_limited(bucket):
-        raise http_error(
-            status_code=429,
-            code=ErrorCode.UNAUTHORIZED,
-            detail="Too many auth attempts for this device",
-            retryable=True,
-        )
-
     device_fp = request.headers.get(DEVICE_FP_HEADER)
     token = request.headers.get(DEVICE_TOKEN_HEADER)
 
     if not device_fp or not token:
-        # Missing headers – fail fast (rate limit already applied above)
         raise http_error(
             status_code=401,
             code=ErrorCode.UNAUTHORIZED,
@@ -83,7 +63,6 @@ def _base_auth(request: Request) -> str:
 
     dev_info = DEV_DEVICES.get(device_fp)
     if not dev_info or not verify_api_token(token, dev_info["token_hash"]):
-        # Wrong credentials – same story, but we don’t call rate-limiter again
         raise http_error(
             status_code=401,
             code=ErrorCode.UNAUTHORIZED,
@@ -91,7 +70,6 @@ def _base_auth(request: Request) -> str:
             retryable=False,
         )
 
-    # Success path – this request passed both rate limit and auth
     return device_fp
 
 
@@ -172,13 +150,14 @@ def _validate_timestamp_or_raise(msg_ts: int, peer: str, msg_id: str) -> None:
             "message too old; dropping",
             extra={"msg_ts": msg_ts, "now": now},
         )
-        # we signal to caller via exception type (HTTP 200 but with an error payload)
+        # we signal to caller via exception type
         raise http_error(
             status_code=200,
-            code=ErrorCode.INVALID_INPUT,
+            code=ErrorCode.OK,  # pseudo-code; we won't actually emit this as HTTP
             detail="MESSAGE_TOO_OLD",
             retryable=False,
         )
+
 
 # ---------------------------------------------------------------------------
 # Startup
@@ -206,7 +185,6 @@ app = FastAPI(lifespan=lifespan)
 @app.post("/v1/router/enqueue")
 def api_enqueue(
     envelope: MessageEnvelope,
-    #device_fp: str = Depends(require_device_auth_role("gateway")),
     device_fp: str = Depends(require_device_auth),
 ):
     """
@@ -256,13 +234,7 @@ def api_enqueue(
         raise
 
     envelope.header.ttl = ttl
-
-    # Enforce size limits before touching the DB
-    envelope_json = _check_envelope_size(
-        envelope=envelope,
-        peer=envelope.header.sender_fp,
-        msg_id=msg_id,
-    )
+    envelope_json = envelope.model_dump_json()
 
     try:
         # we now also store sender/recipient for per-peer quotas in router_db
@@ -404,13 +376,6 @@ def api_on_chunk_received(
         )
         peer = header_sender
 
-    # Enforce size limits on inbound envelopes from BLE
-    _check_envelope_size(
-        envelope=env,
-        peer=peer,
-        msg_id=msg_id,
-    )
-
     # TTL guard on ingress (defense in depth with router TTL checks)
     if env.header.ttl <= 0:
         log_suspicious("TTL_EXPIRED", peer, msg_id, "received with ttl <= 0")
@@ -422,24 +387,6 @@ def api_on_chunk_received(
         )
 
     # Enforce TTL bounds (defensive, fail-closed) with same config as enqueue
-    ttl = env.header.ttl
-    ttl_min = ROUTING_CFG.get("ttl_min", 1)
-    ttl_max = ROUTING_CFG.get("max_ttl", 8)
-
-    if ttl < ttl_min or ttl > ttl_max:
-        log_suspicious(
-            "TTL_INVALID",
-            peer,
-            msg_id,
-            f"ttl {ttl} outside [{ttl_min}, {ttl_max}]",
-        )
-        raise http_error(
-            status_code=400,
-            code=ErrorCode.INVALID_INPUT,
-            detail=f"ttl must be between {ttl_min} and {ttl_max}",
-            retryable=False,
-        )
-
     try:
         validate_ttl(env.header.ttl)
     except ValueError as exc:
@@ -450,7 +397,6 @@ def api_on_chunk_received(
             detail=str(exc),
             retryable=False,
         )
-
 
     # Duplicate detection – now ALWAYS enforced, not controlled by env.routing.dup_suppress
     if is_duplicate(msg_id):
@@ -538,56 +484,3 @@ def api_ids_log_tail(
 
     events = [json.loads(l) for l in lines]
     return {"events": events}
-
-def _check_envelope_size(envelope: MessageEnvelope, peer: str, msg_id: str) -> str:
-    """
-    Enforce payload size limits from config:
-
-    - MAX_ENVELOPE_BYTES: maximum serialized JSON size of the envelope
-    - MAX_CIPHERTEXT_BYTES: maximum size of ciphertext field
-
-    Returns the serialized JSON so callers can reuse it.
-    """
-    # Use module-level constants so tests can monkeypatch them
-    max_env = MAX_ENVELOPE_BYTES
-    max_ct = MAX_CIPHERTEXT_BYTES
-
-    # Serialize once and measure UTF-8 byte length
-    env_json = envelope.model_dump_json()
-    env_size = len(env_json.encode("utf-8"))
-
-    if env_size > max_env:
-        log_suspicious(
-            "ENVELOPE_TOO_LARGE",
-            peer,
-            msg_id,
-            "envelope JSON exceeded max size",
-            extra={"size": env_size, "max": max_env},
-        )
-        raise http_error(
-            status_code=413,  # Payload Too Large
-            code=ErrorCode.INVALID_INPUT,
-            detail="envelope too large",
-            retryable=False,
-        )
-
-    # Ciphertext size (string length in bytes)
-    ciphertext = envelope.ciphertext or ""
-    ct_size = len(ciphertext.encode("utf-8"))
-
-    if ct_size > max_ct:
-        log_suspicious(
-            "CIPHERTEXT_TOO_LARGE",
-            peer,
-            msg_id,
-            "ciphertext exceeded max size",
-            extra={"size": ct_size, "max": max_ct},
-        )
-        raise http_error(
-            status_code=413,  # Payload Too Large
-            code=ErrorCode.INVALID_INPUT,
-            detail="ciphertext too large",
-            retryable=False,
-        )
-
-    return env_json

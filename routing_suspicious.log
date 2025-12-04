@@ -332,3 +332,283 @@
 {"ts": "2025-12-04T05:56:22.380781+00:00", "event": "TEST", "peer": "evil-peer", "msg_id": "msg-0", "detail": "test event", "extra": {}}
 {"ts": "2025-12-04T05:56:22.381136+00:00", "event": "TEST", "peer": "evil-peer", "msg_id": "msg-1", "detail": "test event", "extra": {}}
 {"ts": "2025-12-04T05:56:22.381392+00:00", "event": "TEST", "peer": "evil-peer", "msg_id": "msg-2", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T07:16:26.363641+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T07:16:26.371016+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T07:16:26.375153+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "ca226b1595403371", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T07:16:26.375472+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "3a0de37932e8b197", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T07:16:26.375687+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "95a0deee3cd5e09e", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T07:45:42.805231+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T07:45:42.812486+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T07:45:42.818128+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "ca226b1595403371", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T07:45:42.818486+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "3a0de37932e8b197", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T07:45:42.818764+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "95a0deee3cd5e09e", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T07:46:13.937448+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T07:46:13.944142+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T07:46:13.948488+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "ca226b1595403371", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T07:46:13.948802+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "3a0de37932e8b197", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T07:46:13.949050+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "95a0deee3cd5e09e", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T07:47:51.582064+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T07:47:51.588670+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T07:47:51.593006+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "ca226b1595403371", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T07:47:51.593338+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "3a0de37932e8b197", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T07:47:51.593639+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "95a0deee3cd5e09e", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T07:50:05.941161+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T07:50:05.947951+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T07:50:05.952316+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "ca226b1595403371", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T07:50:05.952625+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "3a0de37932e8b197", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T07:50:05.952852+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "95a0deee3cd5e09e", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T07:51:44.056265+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T07:51:44.062736+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T07:51:44.067010+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "ca226b1595403371", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T07:51:44.067340+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "3a0de37932e8b197", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T07:51:44.067619+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "95a0deee3cd5e09e", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T07:52:53.459819+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T07:52:53.467920+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T07:52:53.472483+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "ca226b1595403371", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T07:52:53.472781+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "3a0de37932e8b197", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T07:52:53.473033+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "95a0deee3cd5e09e", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T08:10:06.576257+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T08:10:06.582941+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T08:10:06.586702+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "ca226b1595403371", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T08:10:06.587017+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "3a0de37932e8b197", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T08:10:06.587234+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "95a0deee3cd5e09e", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T08:10:08.147325+00:00", "event": "TS_FUTURE", "peer": "9e0ee61d4dc616a2", "msg_id": "26a4c55ba86cbbc3", "detail": "message timestamp too far in the future", "extra": {"msg_ts": 1764835818, "now": 1764835808}}
+{"ts": "2025-12-04T08:10:08.154363+00:00", "event": "TS_OLD", "peer": "aa2fdbfc6700d8bc", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764835798, "now": 1764835808}}
+{"ts": "2025-12-04T08:10:08.618978+00:00", "event": "PEER_MISMATCH", "peer": "a5e1feebb275c5ab", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T08:10:08.632340+00:00", "event": "PEER_MISMATCH", "peer": "b435186dcb01a7b3", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "real-sender-fp"}}
+{"ts": "2025-12-04T08:26:52.705846+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T08:26:52.712790+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T08:26:52.716955+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "ca226b1595403371", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T08:26:52.717268+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "3a0de37932e8b197", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T08:26:52.717485+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "95a0deee3cd5e09e", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T08:26:54.286160+00:00", "event": "TS_FUTURE", "peer": "9e0ee61d4dc616a2", "msg_id": "26a4c55ba86cbbc3", "detail": "message timestamp too far in the future", "extra": {"msg_ts": 1764836824, "now": 1764836814}}
+{"ts": "2025-12-04T08:26:54.292788+00:00", "event": "TS_OLD", "peer": "aa2fdbfc6700d8bc", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764836804, "now": 1764836814}}
+{"ts": "2025-12-04T08:26:54.626538+00:00", "event": "PEER_MISMATCH", "peer": "a5e1feebb275c5ab", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T08:26:54.639826+00:00", "event": "PEER_MISMATCH", "peer": "b435186dcb01a7b3", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "real-sender-fp"}}
+{"ts": "2025-12-04T08:32:05.897423+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T08:32:05.904016+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T08:32:05.908391+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "ca226b1595403371", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T08:32:05.908720+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "3a0de37932e8b197", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T08:32:05.908944+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "95a0deee3cd5e09e", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T08:32:07.477453+00:00", "event": "TS_FUTURE", "peer": "9e0ee61d4dc616a2", "msg_id": "26a4c55ba86cbbc3", "detail": "message timestamp too far in the future", "extra": {"msg_ts": 1764837137, "now": 1764837127}}
+{"ts": "2025-12-04T08:32:07.485256+00:00", "event": "TS_OLD", "peer": "aa2fdbfc6700d8bc", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764837117, "now": 1764837127}}
+{"ts": "2025-12-04T08:32:07.818781+00:00", "event": "PEER_MISMATCH", "peer": "a5e1feebb275c5ab", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T08:32:07.832375+00:00", "event": "PEER_MISMATCH", "peer": "b435186dcb01a7b3", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "real-sender-fp"}}
+{"ts": "2025-12-04T08:33:10.577528+00:00", "event": "TS_OLD", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764837180, "now": 1764837190}}
+{"ts": "2025-12-04T08:33:10.940946+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T08:33:10.949450+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T08:33:10.958035+00:00", "event": "TS_FUTURE", "peer": "9e0ee61d4dc616a2", "msg_id": "26a4c55ba86cbbc3", "detail": "message timestamp too far in the future", "extra": {"msg_ts": 1764837200, "now": 1764837190}}
+{"ts": "2025-12-04T08:33:10.968323+00:00", "event": "TS_OLD", "peer": "aa2fdbfc6700d8bc", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764837180, "now": 1764837190}}
+{"ts": "2025-12-04T08:33:11.329562+00:00", "event": "PEER_MISMATCH", "peer": "a5e1feebb275c5ab", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T08:33:11.344540+00:00", "event": "PEER_MISMATCH", "peer": "b435186dcb01a7b3", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "real-sender-fp"}}
+{"ts": "2025-12-04T08:33:11.391623+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "ca226b1595403371", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T08:33:11.391933+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "3a0de37932e8b197", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T08:33:11.392150+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "95a0deee3cd5e09e", "detail": "test event", "extra": {}}
+{"ts": "2024-01-01T00:00:05+00:00", "event": "TEST", "peer": "3d5e09a59c8d3c5e", "msg_id": "ca226b1595403371", "detail": "detail", "extra": {}}
+{"ts": "2025-12-04T08:51:55.906881+00:00", "event": "DUPLICATE_ENQUEUE", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "duplicate msg_id at enqueue; dropping", "extra": {}}
+{"ts": "2025-12-04T08:51:55.915473+00:00", "event": "TS_OLD", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764838305, "now": 1764838315}}
+{"ts": "2025-12-04T08:51:55.948719+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T08:51:55.954973+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T08:51:55.961915+00:00", "event": "TS_FUTURE", "peer": "9e0ee61d4dc616a2", "msg_id": "26a4c55ba86cbbc3", "detail": "message timestamp too far in the future", "extra": {"msg_ts": 1764838325, "now": 1764838315}}
+{"ts": "2025-12-04T08:51:55.968766+00:00", "event": "TS_OLD", "peer": "aa2fdbfc6700d8bc", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764838305, "now": 1764838315}}
+{"ts": "2025-12-04T08:51:55.975729+00:00", "event": "PEER_MISMATCH", "peer": "a5e1feebb275c5ab", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T08:51:55.976119+00:00", "event": "TTL_INVALID", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "ttl 10 outside [1, 3]", "extra": {}}
+{"ts": "2025-12-04T08:51:55.983684+00:00", "event": "PEER_MISMATCH", "peer": "b435186dcb01a7b3", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "real-sender-fp"}}
+{"ts": "2025-12-04T08:51:56.034499+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "ca226b1595403371", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T08:51:56.034817+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "3a0de37932e8b197", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T08:51:56.035180+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "95a0deee3cd5e09e", "detail": "test event", "extra": {}}
+{"ts": "2024-01-01T00:00:05+00:00", "event": "TEST", "peer": "3d5e09a59c8d3c5e", "msg_id": "ca226b1595403371", "detail": "detail", "extra": {}}
+{"ts": "2025-12-04T08:56:08.604024+00:00", "event": "DUPLICATE_ENQUEUE", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "duplicate msg_id at enqueue; dropping", "extra": {}}
+{"ts": "2025-12-04T08:56:08.610480+00:00", "event": "TS_OLD", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764838558, "now": 1764838568}}
+{"ts": "2025-12-04T08:56:08.641559+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T08:56:08.648506+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T08:56:08.654830+00:00", "event": "TS_FUTURE", "peer": "9e0ee61d4dc616a2", "msg_id": "26a4c55ba86cbbc3", "detail": "message timestamp too far in the future", "extra": {"msg_ts": 1764838578, "now": 1764838568}}
+{"ts": "2025-12-04T08:56:08.661241+00:00", "event": "TS_OLD", "peer": "aa2fdbfc6700d8bc", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764838558, "now": 1764838568}}
+{"ts": "2025-12-04T08:56:08.668516+00:00", "event": "PEER_MISMATCH", "peer": "a5e1feebb275c5ab", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T08:56:08.668887+00:00", "event": "TTL_INVALID", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "ttl 10 outside [1, 3]", "extra": {}}
+{"ts": "2025-12-04T08:56:08.675683+00:00", "event": "PEER_MISMATCH", "peer": "b435186dcb01a7b3", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "real-sender-fp"}}
+{"ts": "2025-12-04T08:56:08.724894+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "ca226b1595403371", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T08:56:08.725225+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "3a0de37932e8b197", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T08:56:08.725439+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "95a0deee3cd5e09e", "detail": "test event", "extra": {}}
+{"ts": "2024-01-01T00:00:00+00:00", "event": "TEST", "peer": "3d5e09a59c8d3c5e", "msg_id": "ca226b1595403371", "detail": "detail", "extra": {}}
+{"ts": "2025-12-04T08:57:34.230507+00:00", "event": "DUPLICATE_ENQUEUE", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "duplicate msg_id at enqueue; dropping", "extra": {}}
+{"ts": "2025-12-04T08:57:34.238443+00:00", "event": "TS_OLD", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764838644, "now": 1764838654}}
+{"ts": "2025-12-04T08:57:34.273604+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T08:57:34.281391+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T08:57:34.288995+00:00", "event": "TS_FUTURE", "peer": "9e0ee61d4dc616a2", "msg_id": "26a4c55ba86cbbc3", "detail": "message timestamp too far in the future", "extra": {"msg_ts": 1764838664, "now": 1764838654}}
+{"ts": "2025-12-04T08:57:34.296838+00:00", "event": "TS_OLD", "peer": "aa2fdbfc6700d8bc", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764838644, "now": 1764838654}}
+{"ts": "2025-12-04T08:57:34.305280+00:00", "event": "PEER_MISMATCH", "peer": "a5e1feebb275c5ab", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T08:57:34.305713+00:00", "event": "TTL_INVALID", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "ttl 10 outside [1, 3]", "extra": {}}
+{"ts": "2025-12-04T08:57:34.313153+00:00", "event": "PEER_MISMATCH", "peer": "b435186dcb01a7b3", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "real-sender-fp"}}
+{"ts": "2025-12-04T08:57:34.365640+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "ca226b1595403371", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T08:57:34.366058+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "3a0de37932e8b197", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T08:57:34.366493+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "95a0deee3cd5e09e", "detail": "test event", "extra": {}}
+{"ts": "2024-01-01T00:00:00+00:00", "event": "TEST", "peer": "3d5e09a59c8d3c5e", "msg_id": "ca226b1595403371", "detail": "detail", "extra": {}}
+{"ts": "2025-12-04T09:08:51.198069+00:00", "event": "DUPLICATE_ENQUEUE", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "duplicate msg_id at enqueue; dropping", "extra": {}}
+{"ts": "2025-12-04T09:08:51.206638+00:00", "event": "TS_OLD", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764839321, "now": 1764839331}}
+{"ts": "2025-12-04T09:08:51.241703+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:08:51.248881+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:08:51.256274+00:00", "event": "TS_FUTURE", "peer": "9e0ee61d4dc616a2", "msg_id": "26a4c55ba86cbbc3", "detail": "message timestamp too far in the future", "extra": {"msg_ts": 1764839341, "now": 1764839331}}
+{"ts": "2025-12-04T09:08:51.262716+00:00", "event": "TS_OLD", "peer": "aa2fdbfc6700d8bc", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764839321, "now": 1764839331}}
+{"ts": "2025-12-04T09:08:51.269848+00:00", "event": "PEER_MISMATCH", "peer": "a5e1feebb275c5ab", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:08:51.270260+00:00", "event": "TTL_INVALID", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "ttl 10 outside [1, 3]", "extra": {}}
+{"ts": "2025-12-04T09:08:51.277406+00:00", "event": "PEER_MISMATCH", "peer": "b435186dcb01a7b3", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "real-sender-fp"}}
+{"ts": "2025-12-04T09:08:51.325296+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "ca226b1595403371", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T09:08:51.325638+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "3a0de37932e8b197", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T09:08:51.325886+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "95a0deee3cd5e09e", "detail": "test event", "extra": {}}
+{"ts": "2024-01-01T00:00:00+00:00", "event": "TEST", "peer": "3d5e09a59c8d3c5e", "msg_id": "ca226b1595403371", "detail": "detail", "extra": {}}
+{"ts": "2025-12-04T09:17:32.772244+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "204ec3907f093cf7", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:17:32.776319+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "89eef24e1b071588", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:17:32.779909+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "7625cdf96401dd22", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:17:32.784025+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "c96e1f4047a6c8fd", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:17:32.787654+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "353ac9ff015ef8ee", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:17:32.791726+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "cfbdea6fff0fedf4", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:17:32.795332+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "16c36367a515f73a", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:17:32.799119+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "8dc14d97ea7be289", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:17:32.802947+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "5abd952edc90bf91", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:17:32.806778+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "f84f84f892f0826b", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:17:32.810561+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "0d2719db924a00e6", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:17:32.814077+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "11e96af3db829e43", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:17:32.818142+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "ddb8a8cc28d21b19", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:17:32.821721+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "2da1d571dde899c4", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:17:32.826117+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "d4fd0141c9da409c", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:17:32.829764+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "226a5359e4c22593", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:17:32.833637+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "dfcbcbc7f946a268", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:17:32.837295+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "10e1aa5a01a37522", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:17:32.840803+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "9d30393b35eab973", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:17:32.844219+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "155a8c7598c782f8", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:17:35.260541+00:00", "event": "TTL_EXPIRED", "peer": "6db689b116c2d5a8", "msg_id": "5adcd4f122f1bc8a", "detail": "received with ttl <= 0", "extra": {}}
+{"ts": "2025-12-04T09:17:35.264567+00:00", "event": "TTL_EXPIRED", "peer": "6db689b116c2d5a8", "msg_id": "ff2ef74ceb1ab2ab", "detail": "received with ttl <= 0", "extra": {}}
+{"ts": "2025-12-04T09:17:35.268198+00:00", "event": "TTL_EXPIRED", "peer": "6db689b116c2d5a8", "msg_id": "10850affbca388e0", "detail": "received with ttl <= 0", "extra": {}}
+{"ts": "2025-12-04T09:17:35.272268+00:00", "event": "TTL_EXPIRED", "peer": "6db689b116c2d5a8", "msg_id": "38402e509c3f40d2", "detail": "received with ttl <= 0", "extra": {}}
+{"ts": "2025-12-04T09:17:35.275774+00:00", "event": "TTL_EXPIRED", "peer": "6db689b116c2d5a8", "msg_id": "0611e82559776215", "detail": "received with ttl <= 0", "extra": {}}
+{"ts": "2025-12-04T09:51:45.087008+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "95aaf91b920f8374", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:51:45.090835+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "74db80390cad352d", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:51:45.094897+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "5685ee20e68c7be8", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:51:45.098716+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "4886c52ebd02c5d9", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:51:45.103498+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "910fe436e2d4bcfd", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:51:45.107397+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "9aa45634ea7fcaf4", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:51:45.111366+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "81da5444de60ddc0", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:51:45.115119+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "4b33ca3e5ed8a449", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:51:45.118829+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "d203bf91d3f2c54d", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:51:45.122549+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "fa30034cbf6f5e6f", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:51:45.126467+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "99ac56a0534f5389", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:51:45.130190+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "05a951f1e7052358", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:51:45.134022+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "688a1ad0bff168f8", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:51:45.137730+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "228d084ce57b575d", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:51:45.141397+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "2729251d134ac42e", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:51:45.145425+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "6f7d041fd210e8f8", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:51:45.149260+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "f0a5c4f82f792f72", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:51:45.152878+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "46f50c362f148d1e", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:51:45.156483+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "541bb8156ffec6a8", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:51:45.160309+00:00", "event": "RATE_LIMIT", "peer": "2d29a206b5177673", "msg_id": "f5cf4e4f8311e1d7", "detail": "per-peer rate limit exceeded", "extra": {}}
+{"ts": "2025-12-04T09:51:47.580474+00:00", "event": "TTL_EXPIRED", "peer": "6db689b116c2d5a8", "msg_id": "fb5d03fdfb3d1ce0", "detail": "received with ttl <= 0", "extra": {}}
+{"ts": "2025-12-04T09:51:47.584564+00:00", "event": "TTL_EXPIRED", "peer": "6db689b116c2d5a8", "msg_id": "d59c0f0fda9bda01", "detail": "received with ttl <= 0", "extra": {}}
+{"ts": "2025-12-04T09:51:47.588320+00:00", "event": "TTL_EXPIRED", "peer": "6db689b116c2d5a8", "msg_id": "6a441b72836740dd", "detail": "received with ttl <= 0", "extra": {}}
+{"ts": "2025-12-04T09:51:47.592466+00:00", "event": "TTL_EXPIRED", "peer": "6db689b116c2d5a8", "msg_id": "d98ff1300eeb9ab2", "detail": "received with ttl <= 0", "extra": {}}
+{"ts": "2025-12-04T09:51:47.596497+00:00", "event": "TTL_EXPIRED", "peer": "6db689b116c2d5a8", "msg_id": "c794f0ba4d294111", "detail": "received with ttl <= 0", "extra": {}}
+{"ts": "2025-12-04T09:51:58.498522+00:00", "event": "DUPLICATE_ENQUEUE", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "duplicate msg_id at enqueue; dropping", "extra": {}}
+{"ts": "2025-12-04T09:51:58.506002+00:00", "event": "TS_OLD", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764841908, "now": 1764841918}}
+{"ts": "2025-12-04T09:51:58.665960+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:51:58.672478+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:51:58.679197+00:00", "event": "TS_FUTURE", "peer": "9e0ee61d4dc616a2", "msg_id": "26a4c55ba86cbbc3", "detail": "message timestamp too far in the future", "extra": {"msg_ts": 1764841928, "now": 1764841918}}
+{"ts": "2025-12-04T09:51:58.686008+00:00", "event": "TS_OLD", "peer": "aa2fdbfc6700d8bc", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764841908, "now": 1764841918}}
+{"ts": "2025-12-04T09:51:58.693985+00:00", "event": "PEER_MISMATCH", "peer": "a5e1feebb275c5ab", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:51:58.694553+00:00", "event": "TTL_INVALID", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "ttl 10 outside [1, 3]", "extra": {}}
+{"ts": "2025-12-04T09:51:58.701999+00:00", "event": "PEER_MISMATCH", "peer": "b435186dcb01a7b3", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "real-sender-fp"}}
+{"ts": "2025-12-04T09:51:58.753486+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "ca226b1595403371", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T09:51:58.753818+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "3a0de37932e8b197", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T09:51:58.754077+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "95a0deee3cd5e09e", "detail": "test event", "extra": {}}
+{"ts": "2024-01-01T00:00:00+00:00", "event": "TEST", "peer": "3d5e09a59c8d3c5e", "msg_id": "ca226b1595403371", "detail": "detail", "extra": {}}
+{"ts": "2025-12-04T09:52:19.242193+00:00", "event": "DUPLICATE_ENQUEUE", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "duplicate msg_id at enqueue; dropping", "extra": {}}
+{"ts": "2025-12-04T09:52:19.249314+00:00", "event": "TS_OLD", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764841929, "now": 1764841939}}
+{"ts": "2025-12-04T09:52:19.404289+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:52:19.410784+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:52:19.417302+00:00", "event": "TS_FUTURE", "peer": "9e0ee61d4dc616a2", "msg_id": "26a4c55ba86cbbc3", "detail": "message timestamp too far in the future", "extra": {"msg_ts": 1764841949, "now": 1764841939}}
+{"ts": "2025-12-04T09:52:19.424356+00:00", "event": "TS_OLD", "peer": "aa2fdbfc6700d8bc", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764841929, "now": 1764841939}}
+{"ts": "2025-12-04T09:52:19.431105+00:00", "event": "PEER_MISMATCH", "peer": "a5e1feebb275c5ab", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:52:19.431440+00:00", "event": "TTL_INVALID", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "ttl 10 outside [1, 3]", "extra": {}}
+{"ts": "2025-12-04T09:52:19.438303+00:00", "event": "PEER_MISMATCH", "peer": "b435186dcb01a7b3", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "real-sender-fp"}}
+{"ts": "2025-12-04T09:52:19.495385+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "ca226b1595403371", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T09:52:19.495837+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "3a0de37932e8b197", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T09:52:19.496328+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "95a0deee3cd5e09e", "detail": "test event", "extra": {}}
+{"ts": "2024-01-01T00:00:00+00:00", "event": "TEST", "peer": "3d5e09a59c8d3c5e", "msg_id": "ca226b1595403371", "detail": "detail", "extra": {}}
+{"ts": "2025-12-04T09:52:28.861909+00:00", "event": "DUPLICATE_ENQUEUE", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "duplicate msg_id at enqueue; dropping", "extra": {}}
+{"ts": "2025-12-04T09:52:28.868874+00:00", "event": "TS_OLD", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764841938, "now": 1764841948}}
+{"ts": "2025-12-04T09:52:29.024570+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:52:29.031404+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:52:29.038302+00:00", "event": "TS_FUTURE", "peer": "9e0ee61d4dc616a2", "msg_id": "26a4c55ba86cbbc3", "detail": "message timestamp too far in the future", "extra": {"msg_ts": 1764841959, "now": 1764841949}}
+{"ts": "2025-12-04T09:52:29.044977+00:00", "event": "TS_OLD", "peer": "aa2fdbfc6700d8bc", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764841939, "now": 1764841949}}
+{"ts": "2025-12-04T09:52:29.051946+00:00", "event": "PEER_MISMATCH", "peer": "a5e1feebb275c5ab", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:52:29.052295+00:00", "event": "TTL_INVALID", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "ttl 10 outside [1, 3]", "extra": {}}
+{"ts": "2025-12-04T09:52:29.059295+00:00", "event": "PEER_MISMATCH", "peer": "b435186dcb01a7b3", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "real-sender-fp"}}
+{"ts": "2025-12-04T09:52:29.123533+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "ca226b1595403371", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T09:52:29.124020+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "3a0de37932e8b197", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T09:52:29.124447+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "95a0deee3cd5e09e", "detail": "test event", "extra": {}}
+{"ts": "2024-01-01T00:00:00+00:00", "event": "TEST", "peer": "3d5e09a59c8d3c5e", "msg_id": "ca226b1595403371", "detail": "detail", "extra": {}}
+{"ts": "2025-12-04T09:52:39.507409+00:00", "event": "DUPLICATE_ENQUEUE", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "duplicate msg_id at enqueue; dropping", "extra": {}}
+{"ts": "2025-12-04T09:52:39.515802+00:00", "event": "TS_OLD", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764841949, "now": 1764841959}}
+{"ts": "2025-12-04T09:52:39.687190+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:52:39.693959+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:52:39.701614+00:00", "event": "TS_FUTURE", "peer": "9e0ee61d4dc616a2", "msg_id": "26a4c55ba86cbbc3", "detail": "message timestamp too far in the future", "extra": {"msg_ts": 1764841969, "now": 1764841959}}
+{"ts": "2025-12-04T09:52:39.708461+00:00", "event": "TS_OLD", "peer": "aa2fdbfc6700d8bc", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764841949, "now": 1764841959}}
+{"ts": "2025-12-04T09:52:39.715871+00:00", "event": "PEER_MISMATCH", "peer": "a5e1feebb275c5ab", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:52:39.716263+00:00", "event": "TTL_INVALID", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "ttl 10 outside [1, 3]", "extra": {}}
+{"ts": "2025-12-04T09:52:39.722819+00:00", "event": "PEER_MISMATCH", "peer": "b435186dcb01a7b3", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "real-sender-fp"}}
+{"ts": "2025-12-04T09:52:39.770837+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "ca226b1595403371", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T09:52:39.771164+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "3a0de37932e8b197", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T09:52:39.771416+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "95a0deee3cd5e09e", "detail": "test event", "extra": {}}
+{"ts": "2024-01-01T00:00:00+00:00", "event": "TEST", "peer": "3d5e09a59c8d3c5e", "msg_id": "ca226b1595403371", "detail": "detail", "extra": {}}
+{"ts": "2025-12-04T09:52:51.107192+00:00", "event": "DUPLICATE_ENQUEUE", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "duplicate msg_id at enqueue; dropping", "extra": {}}
+{"ts": "2025-12-04T09:52:51.114579+00:00", "event": "TS_OLD", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764841961, "now": 1764841971}}
+{"ts": "2025-12-04T09:52:51.274888+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:52:51.281660+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:52:51.288696+00:00", "event": "TS_FUTURE", "peer": "9e0ee61d4dc616a2", "msg_id": "26a4c55ba86cbbc3", "detail": "message timestamp too far in the future", "extra": {"msg_ts": 1764841981, "now": 1764841971}}
+{"ts": "2025-12-04T09:52:51.295744+00:00", "event": "TS_OLD", "peer": "aa2fdbfc6700d8bc", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764841961, "now": 1764841971}}
+{"ts": "2025-12-04T09:52:51.302803+00:00", "event": "PEER_MISMATCH", "peer": "a5e1feebb275c5ab", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:52:51.303188+00:00", "event": "TTL_INVALID", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "ttl 10 outside [1, 3]", "extra": {}}
+{"ts": "2025-12-04T09:52:51.310696+00:00", "event": "PEER_MISMATCH", "peer": "b435186dcb01a7b3", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "real-sender-fp"}}
+{"ts": "2025-12-04T09:52:51.359235+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "ca226b1595403371", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T09:52:51.359586+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "3a0de37932e8b197", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T09:52:51.359817+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "95a0deee3cd5e09e", "detail": "test event", "extra": {}}
+{"ts": "2024-01-01T00:00:00+00:00", "event": "TEST", "peer": "3d5e09a59c8d3c5e", "msg_id": "ca226b1595403371", "detail": "detail", "extra": {}}
+{"ts": "2025-12-04T09:52:59.839085+00:00", "event": "DUPLICATE_ENQUEUE", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "duplicate msg_id at enqueue; dropping", "extra": {}}
+{"ts": "2025-12-04T09:52:59.846424+00:00", "event": "TS_OLD", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764841969, "now": 1764841979}}
+{"ts": "2025-12-04T09:53:00.005865+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:53:00.012921+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:53:00.021782+00:00", "event": "TS_FUTURE", "peer": "9e0ee61d4dc616a2", "msg_id": "26a4c55ba86cbbc3", "detail": "message timestamp too far in the future", "extra": {"msg_ts": 1764841990, "now": 1764841980}}
+{"ts": "2025-12-04T09:53:00.028946+00:00", "event": "TS_OLD", "peer": "aa2fdbfc6700d8bc", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764841970, "now": 1764841980}}
+{"ts": "2025-12-04T09:53:00.036247+00:00", "event": "PEER_MISMATCH", "peer": "a5e1feebb275c5ab", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:53:00.036632+00:00", "event": "TTL_INVALID", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "ttl 10 outside [1, 3]", "extra": {}}
+{"ts": "2025-12-04T09:53:00.043145+00:00", "event": "PEER_MISMATCH", "peer": "b435186dcb01a7b3", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "real-sender-fp"}}
+{"ts": "2025-12-04T09:53:00.092790+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "ca226b1595403371", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T09:53:00.093128+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "3a0de37932e8b197", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T09:53:00.093379+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "95a0deee3cd5e09e", "detail": "test event", "extra": {}}
+{"ts": "2024-01-01T00:00:00+00:00", "event": "TEST", "peer": "3d5e09a59c8d3c5e", "msg_id": "ca226b1595403371", "detail": "detail", "extra": {}}
+{"ts": "2025-12-04T09:53:12.549817+00:00", "event": "DUPLICATE_ENQUEUE", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "duplicate msg_id at enqueue; dropping", "extra": {}}
+{"ts": "2025-12-04T09:53:12.556926+00:00", "event": "TS_OLD", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764841982, "now": 1764841992}}
+{"ts": "2025-12-04T09:53:12.714602+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:53:12.721442+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:53:12.728567+00:00", "event": "TS_FUTURE", "peer": "9e0ee61d4dc616a2", "msg_id": "26a4c55ba86cbbc3", "detail": "message timestamp too far in the future", "extra": {"msg_ts": 1764842002, "now": 1764841992}}
+{"ts": "2025-12-04T09:53:12.735363+00:00", "event": "TS_OLD", "peer": "aa2fdbfc6700d8bc", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764841982, "now": 1764841992}}
+{"ts": "2025-12-04T09:53:12.742411+00:00", "event": "PEER_MISMATCH", "peer": "a5e1feebb275c5ab", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T09:53:12.742819+00:00", "event": "TTL_INVALID", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "ttl 10 outside [1, 3]", "extra": {}}
+{"ts": "2025-12-04T09:53:12.750350+00:00", "event": "PEER_MISMATCH", "peer": "b435186dcb01a7b3", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "real-sender-fp"}}
+{"ts": "2025-12-04T09:53:12.797793+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "ca226b1595403371", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T09:53:12.798125+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "3a0de37932e8b197", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T09:53:12.798378+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "95a0deee3cd5e09e", "detail": "test event", "extra": {}}
+{"ts": "2024-01-01T00:00:00+00:00", "event": "TEST", "peer": "3d5e09a59c8d3c5e", "msg_id": "ca226b1595403371", "detail": "detail", "extra": {}}
+{"ts": "2025-12-04T10:01:43.939486+00:00", "event": "DUPLICATE_ENQUEUE", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "duplicate msg_id at enqueue; dropping", "extra": {}}
+{"ts": "2025-12-04T10:01:43.946653+00:00", "event": "TS_OLD", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764842493, "now": 1764842503}}
+{"ts": "2025-12-04T10:01:43.977174+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T10:01:43.983797+00:00", "event": "PEER_MISMATCH", "peer": "37effc81d805811d", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T10:01:43.990901+00:00", "event": "TS_FUTURE", "peer": "9e0ee61d4dc616a2", "msg_id": "26a4c55ba86cbbc3", "detail": "message timestamp too far in the future", "extra": {"msg_ts": 1764842513, "now": 1764842503}}
+{"ts": "2025-12-04T10:01:43.997737+00:00", "event": "TS_OLD", "peer": "aa2fdbfc6700d8bc", "msg_id": "26a4c55ba86cbbc3", "detail": "message too old; dropping", "extra": {"msg_ts": 1764842493, "now": 1764842503}}
+{"ts": "2025-12-04T10:01:44.004184+00:00", "event": "PEER_MISMATCH", "peer": "a5e1feebb275c5ab", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "A"}}
+{"ts": "2025-12-04T10:01:44.004548+00:00", "event": "TTL_INVALID", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "ttl 10 outside [1, 3]", "extra": {}}
+{"ts": "2025-12-04T10:01:44.011638+00:00", "event": "PEER_MISMATCH", "peer": "b435186dcb01a7b3", "msg_id": "26a4c55ba86cbbc3", "detail": "link_meta.peer != header.sender_fp", "extra": {"header_sender": "real-sender-fp"}}
+{"ts": "2025-12-04T10:01:44.056998+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "ca226b1595403371", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T10:01:44.057326+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "3a0de37932e8b197", "detail": "test event", "extra": {}}
+{"ts": "2025-12-04T10:01:44.057548+00:00", "event": "TEST", "peer": "b47d60e5c22f71fe", "msg_id": "95a0deee3cd5e09e", "detail": "test event", "extra": {}}
+{"ts": "2024-01-01T00:00:00+00:00", "event": "TEST", "peer": "3d5e09a59c8d3c5e", "msg_id": "ca226b1595403371", "detail": "detail", "extra": {}}
+{"ts": "2025-12-04T10:01:45.598289+00:00", "event": "CIPHERTEXT_TOO_LARGE", "peer": "559aead08264d579", "msg_id": "26a4c55ba86cbbc3", "detail": "ciphertext exceeded max size", "extra": {"size": 100, "max": 10}}

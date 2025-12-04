@@ -1,4 +1,10 @@
 # -----------------------------
+# Payload size limits
+# -----------------------------
+max_envelope_bytes: 16384        # ~16 KB max serialized envelope size
+max_ciphertext_bytes: 16384      # ~16 KB max ciphertext (per message)
+
+# -----------------------------
 # Routing / Retry Configuration
 # -----------------------------
 
@@ -6,6 +12,7 @@ max_retries: 5                   # maximum resend attempts before dropping a mes
 base_retry_backoff_ms: 500       # base delay for exponential backoff (doubles each retry)
 retry_jitter_ms: 200             # small random jitter added to backoff to avoid synchronized bursts
 max_queue_size: 5000             # caps total pending messages allowed in the routing queue
+
 
 # TTL configuration
 ttl_min: 1                       # lowest allowed TTL value accepted from clients
@@ -25,3 +32,4 @@ ids:
 
   duplicate_suppression_ttl: 600 # how long (in seconds) to remember msg_ids for deduplication
   block_peer_after: 15           # number of suspicious events after which a peer is temporarily blocked
+  block_peer_ttl_seconds: 3600     # how long a peer stays blocked before being auto-unblocked

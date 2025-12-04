@@ -1,6 +1,6 @@
 # services/routing_service/test/routing_test.py
-# pytest services/routing_service/test/routing_test.py -v
-# uvicorn services.routing_service.routing_api:app --host 0.0.0.0 --port 9002 --reload
+# pytest services/routing_service/test/routing_ids.py -v
+# uvicorn services.routing_service.routing_api:app --host 0.0.0.0 --port 09001 --reload
 import time
 import uuid
 import httpx
@@ -37,7 +37,7 @@ def make_envelope(sender_fp: str, recipient_fp: str, ttl: int = 5) -> MessageEnv
     )
     return MessageEnvelope(
         header=header,
-        ciphertext="deadbeef",  # placeholder AES-GCM ciphertext
+        ciphertext="deadbeef",  # placeholder AES-GCM ciphertext     
         chunks=ChunkInfo(),
         routing=RoutingMeta(),
     )
@@ -46,9 +46,6 @@ def make_envelope(sender_fp: str, recipient_fp: str, ttl: int = 5) -> MessageEnv
 async def _ensure_router_or_skip():
     """
     Try hitting /v1/router/stats; if it fails, skip tests.
-
-    Note: /stats is now admin+DEBUG-only in the API, but ANY response
-    < 500 is enough to know the service is alive for this check.
     """
     async with httpx.AsyncClient(timeout=3.0) as client:
         try:
